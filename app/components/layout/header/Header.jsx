@@ -59,6 +59,7 @@ const Header = () => {
                             <div className={`${styles.header__items__top__form__hamburger} ${ham ? styles.hamAct : ""}`}
                                 onClick={() => {
                                     setham(!ham)
+                                    setCatalog(false)
                                 }}
                             ></div>
 
@@ -106,7 +107,10 @@ const Header = () => {
                 <div className={styles.header__items__bottom}>
                     <MyContainer>
                         <div className={styles.header__items__bottom__items}>
-                            <button onClick={() => setCatalog(!catalog)} className={`${styles.katalog} ${catalog ? styles.katalogAct : ""}`}>
+                            <button onClick={() => {
+                                setCatalog(!catalog)
+                                setham(false)
+                            }} className={`${styles.katalog} ${catalog ? styles.katalogAct : ""}`}>
                                 <Image
                                     src={dots}
                                     width={20}
