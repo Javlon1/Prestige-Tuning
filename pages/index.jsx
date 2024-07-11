@@ -24,6 +24,9 @@ const Index = () => {
                 <title>Home</title>
             </Head>
 
+            <main>
+                <Intro />
+            </main>
         </>
     )
 }
