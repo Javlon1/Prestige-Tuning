@@ -9,7 +9,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import slayd1 from '../../../../../public/img/me.jpg'
+import slayd1 from '../../../../../public/img/slayd.png'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer';
 
 

@@ -2,6 +2,7 @@ import * as React from 'react'
 import Head from 'next/head'
 import Intro from '@/app/components/screens/home/Intro/Intro';
 import Category from '@/app/components/screens/home/Category/Category';
+import TopSell from '@/app/components/screens/home/TopSell/TopSell';
 
 const Index = () => {
 
@@ -28,6 +29,7 @@ const Index = () => {
             <main>
                 <Intro />
                 <Category />
+                <TopSell />
             </main>
         </>
     )
