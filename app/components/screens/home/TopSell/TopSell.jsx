@@ -114,6 +114,49 @@ const TopSell = () => {
                         </Swiper>
                     </ul>
                 </div>
+                <ul className={styles.topSell__sale}>
+                    <Swiper
+                        modules={[Navigation, Scrollbar, A11y]}
+                        spaceBetween={10}
+                        navigation={{
+                            prevEl: `.${styles.btn__next}`,
+                            nextEl: `.${styles.btn__prev}`,
+                        }}
+                        loop={true}
+                        breakpoints={{
+                            320: {
+                                slidesPerView: 2,
+                            },
+                            768: {
+                                slidesPerView: 2,
+                            },
+                            1024: {
+                                slidesPerView: 3,
+                            },
+                        }}
+                    >
+                        {
+                            data?.map((item) => (
+                                <SwiperSlide key={item.id}>
+                                    <div className={styles.topSell__sale__item}>
+                                        <div className={styles.title}>
+                                            <b>Gentra OPTRA faralar sotuvda !</b>
+                                            <button>
+                                                Tanlash
+                                                <i className="fa-solid fa-arrow-right-long"></i>
+                                            </button>
+                                        </div>
+                                        <Image
+                                            src={slayd1}
+                                            alt='slayd'
+                                            priority
+                                        />
+                                    </div>
+                                </SwiperSlide>
+                            ))
+                        }
+                    </Swiper>
+                </ul>
             </MyContainer>
         </section>
     )
