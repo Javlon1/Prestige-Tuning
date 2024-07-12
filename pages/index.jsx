@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Intro from '@/app/components/screens/home/Intro/Intro';
 import Category from '@/app/components/screens/home/Category/Category';
 import TopSell from '@/app/components/screens/home/TopSell/TopSell';
+import Recommend from '@/app/components/screens/home/Recommend/Recommend';
 
 const Index = () => {
 
@@ -30,6 +31,7 @@ const Index = () => {
                 <Intro />
                 <Category />
                 <TopSell />
+                <Recommend />
             </main>
         </>
     )
