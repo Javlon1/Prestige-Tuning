@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Head from 'next/head'
 import Intro from '@/app/components/screens/home/Intro/Intro';
+import Category from '@/app/components/screens/home/Category/Category';
 
 const Index = () => {
 
@@ -26,6 +27,7 @@ const Index = () => {
 
             <main>
                 <Intro />
+                <Category />
             </main>
         </>
     )

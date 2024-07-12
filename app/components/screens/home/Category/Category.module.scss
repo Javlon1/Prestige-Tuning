@@ -1,0 +1,94 @@
+@import '../../../../assets/variables';
+
+.category {
+    padding: 20px 0;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        box-shadow: $shadow;
+        border-radius: 1rem;
+        overflow: hidden;
+
+        &__item {
+            flex: 1;
+            min-width: 32%;
+            transition: $transition;
+
+            a {
+                display: flex;
+                gap: 20px;
+                width: 100%;
+                padding: 2rem;
+                border: 1px solid $border-color;
+                background-color: $white;
+                color: $black;
+            }
+
+            &:hover {
+                transform: translate(-.4rem, .4rem);
+                box-shadow: $shadow;
+            }
+
+            &:last-child {
+                a {
+                    background-image: url('../../../../../public/img/category-bc.png');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                    background-color: #453888;
+                    color: $white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    overflow: hidden;
+                    position: relative;
+
+                    .img {
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                    }
+
+                    i {
+                        color: $white;
+                        font-size: 1.1rem;
+                    }
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        background-color: $white;
+                        opacity: .5;
+                        top: 40px;
+                        right: -90px;
+                        width: 200px;
+                        height: 200px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .category {
+        &__list {
+            &__item {
+                min-width: 49%;
+
+                a {
+                    gap: 10px;
+                    padding: 1rem;
+                }
+
+                &:last-child {
+                    a {
+                        padding: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}
