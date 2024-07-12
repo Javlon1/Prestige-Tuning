@@ -32,52 +32,38 @@ const Intro = () => {
                         loop={true}
                     >
                         <SwiperSlide>
-                            <Image
-                                src={slayd1}
-                                alt='slayd'
-                                priority
-                            />
-                            {/* {introTitle?.map((item) => (
-                            <strong className={styles.intro__title} key={item.id}>
-                                {item[`nav_${lan}`]}
-                            </strong>
-                        ))} */}
+                            <div className={styles.intro__item}>
+                                <div className={styles.intro__item__left}>
+                                    <b className={styles.intro__item__left__title}>
+                                        Original Genrta tuning uchun <span>15%</span>  gacha chegirma !
+                                    </b>
+                                    <p>Aksiya 1-iyulga qadar davom etadi.</p>
+                                </div>
+                                <div className={styles.intro__item__right}>
+                                    <Image
+                                        src={slayd1}
+                                        alt='slayd'
+                                        priority
+                                    />
+                                </div>
+                            </div>
                         </SwiperSlide>
                         <SwiperSlide>
-                            <Image
-                                src={slayd1}
-                                alt='slayd'
-                                priority
-                            />
-                            {/* {introTitle?.map((item) => (
-                            <strong className={styles.intro__title} key={item.id}>
-                                {item[`nav_${lan}`]}
-                            </strong>
-                        ))} */}
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={slayd1}
-                                alt='slayd'
-                                priority
-                            />
-                            {/* {introTitle?.map((item) => (
-                            <strong className={styles.intro__title} key={item.id}>
-                                {item[`nav_${lan}`]}
-                            </strong>
-                        ))} */}
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={slayd1}
-                                alt='slayd'
-                                priority
-                            />
-                            {/* {introTitle?.map((item) => (
-                            <strong className={styles.intro__title} key={item.id}>
-                                {item[`nav_${lan}`]}
-                            </strong>
-                        ))} */}
+                            <div className={styles.intro__item}>
+                                <div className={styles.intro__item__left}>
+                                    <b className={styles.intro__item__left__title}>
+                                        Original Genrta tuning uchun <span>15%</span>  gacha chegirma !
+                                    </b>
+                                    <p>Aksiya 1-iyulga qadar davom etadi.</p>
+                                </div>
+                                <div className={styles.intro__item__right}>
+                                    <Image
+                                        src={slayd1}
+                                        alt='slayd'
+                                        priority
+                                    />
+                                </div>
+                            </div>
                         </SwiperSlide>
                     </Swiper>
                     <div className={styles['swiper-button-prev-custom']}>

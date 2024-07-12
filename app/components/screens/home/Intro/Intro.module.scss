@@ -10,12 +10,6 @@
     .swiper-container {
         position: relative;
 
-        img {
-            width: 100%;
-            height: 60vh;
-            border-radius: 2rem;
-        }
-
         .swiper-button-next-custom,
         .swiper-button-prev-custom {
             width: 40px;
@@ -56,15 +50,74 @@
 
         }
 
-        strong {
-            width: 400px;
-            position: absolute;
-            left: 50px;
-            bottom: 6rem;
-            z-index: 15;
-            @include title;
-            color: $white;
-            line-height: 60px;
+
+        .intro__item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 3rem;
+            border-radius: 2rem;
+            background-color: $black;
+
+            &__left {
+                width: 55%;
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+
+                b {
+                    font-size: 3rem;
+                    color: $white;
+
+                    span {
+                        background-color: $red;
+                        padding: 2px 1rem;
+                        border-radius: 1rem;
+                    }
+                }
+
+                p {
+                    font-size: 1.1rem;
+                    color: $white;
+                }
+            }
+
+            &__right {
+                width: 45%;
+                height: 50vh;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .intro {
+        .swiper-container {
+            .intro__item {
+                &__left {
+                    gap: 10px;
+                    width: 45%;
+
+                    b {
+                        font-size: 1.9rem;
+                    }
+                }
+
+                &__right {
+                    width: 50%;
+                    height: 40vh;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
         }
     }
 }
@@ -72,8 +125,66 @@
 @media only screen and (max-width: 991px) {
     .intro {
         .swiper-container {
-            img {
-                height: 40vh;
+            .intro__item {
+                &__left {
+                    gap: 10px;
+                    width: 45%;
+
+                    b {
+                        font-size: 1.4rem;
+                    }
+                }
+
+                &__right {
+                    width: 50%;
+                    height: 30vh;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .intro {
+        .swiper-container {
+            .intro__item {
+                flex-direction: column;
+                padding-bottom: 2rem;
+
+                &__left {
+                    margin-top: 1rem;
+                    gap: 1rem;
+                    width: 100%;
+
+                    b {
+                        text-align: center;
+                        font-size: 1.4rem;
+                    }
+
+                    p {
+                        text-align: center;
+                    }
+                }
+
+                &__right {
+                    order: -1;
+                    width: 100%;
+                    height: 30vh;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+
+            .swiper-pagination-custom {
+                display: none;
             }
         }
     }
