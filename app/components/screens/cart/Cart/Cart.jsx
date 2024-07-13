@@ -8,11 +8,25 @@ import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 
 const Cart = () => {
     const { cart, setCart } = React.useContext(Context);
-
     const hanndlerDelCart = () => {
         setCart([])
     }
 
+    const calculateTotalSum = () => {
+        return cart.reduce((sum, item) => {
+            const price = parseFloat(item.price);
+            return sum + (isNaN(price) ? 0 : price);
+        }, 0);
+    };
+
+
+    const handleQuantityChange = (id, delta) => {
+        setCart(cart.map(item =>
+            item.id === id ? { ...item, quantity: Math.max(item.quantity + delta, 1) } : item
+        ));
+    };
+
+    const totalSum = calculateTotalSum();
     console.log(cart);
     return (
         <section className={styles.cart}>
@@ -39,20 +53,27 @@ const Cart = () => {
                                                     />
                                                     <p>{item.title}</p>
                                                 </div>
-                                                <b>5 kun</b>
-                                                <div className={styles.count}>
-                                                    <button>
-                                                        <i className="fa-solid fa-minus"></i>
-                                                    </button>
-                                                    <span>1</span>
-                                                    <button>
-                                                        <i className="fa-solid fa-plus"></i>
+                                                <div className={styles.ost}>
+                                                    <b className={styles.day}>5 kun</b>
+                                                    <div className={styles.count}>
+                                                        <button onClick={() => handleQuantityChange(item.id, -1)}>
+                                                            <i className="fa-solid fa-minus"></i>
+                                                        </button>
+                                                        <span>{item.quantity}</span>
+                                                        <button onClick={() => handleQuantityChange(item.id, 1)}>
+                                                            <i className="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                    <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
+                                                    <button
+                                                        className={styles.btn}
+                                                        onClick={() => {
+                                                            setCart(cart.filter(cartItem => cartItem.id !== item.id));
+                                                        }}
+                                                    >
+                                                        <i className="fa-solid fa-trash-can"></i>
                                                     </button>
                                                 </div>
-                                                <p>{item.price}</p>
-                                                <button>
-                                                    <i className="fa-solid fa-trash-can"></i>
-                                                </button>
                                             </li>
                                         ))
                                         : <p className={styles.empty}>Savatchangiz bo’sh</p>
@@ -63,14 +84,14 @@ const Cart = () => {
                     <div className={styles.cart__item__right}>
                         <div className={styles.cart__item__right__content}>
                             <h3>Buyurtmangiz</h3>
-                            <span>Tovarlar <b>{cart.length}</b></span>
-                            <span>Jami <b>{cart.length}</b></span>
-                            <button>Buyurtma berish</button>
+                            <span>Tovarlar soni <b>{cart.length}</b></span>
+                            <span>Jami narxi <b>{totalSum.toLocaleString('en-US').replace(/,/g, ' ')}</b></span>
+                            <Link href={'/register'} className={styles.btn}>Buyurtma berish</Link>
                         </div>
                     </div>
                 </div>
             </MyContainer>
-        </section>
+        </section >
     )
 }
 

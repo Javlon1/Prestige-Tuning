@@ -23,61 +23,61 @@ const Recommend = () => {
             {
                 id: 1,
                 title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "1 850 000 сум",
+                price: "1850000",
                 image: slayd1
             },
             {
                 id: 2,
                 title: "Роскошный комфорт",
-                price: "2 300 000 сум",
+                price: "2300000",
                 image: slayd1
             },
             {
                 id: 3,
                 title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "3 500 000 сум",
+                price: "3500000",
                 image: slayd1
             },
             {
                 id: 4,
                 title: "Рабочий стол руководителя",
-                price: "1 700 000 сум",
+                price: "1700000",
                 image: slayd1
             },
             {
                 id: 5,
                 title: "Эргономичное кресло",
-                price: "1 200 000 сум",
+                price: "1200000",
                 image: slayd1
             },
             {
                 id: 6,
                 title: "Хрустальная люстра",
-                price: "2 000 000 сум",
+                price: "2000000",
                 image: slayd1
             },
             {
                 id: 7,
                 title: "Деревянный шкаф",
-                price: "2 800 000 сум",
+                price: "2800000",
                 image: slayd1
             },
             {
                 id: 8,
                 title: "Кухонный остров",
-                price: "3 200 000 сум",
+                price: "3200000",
                 image: slayd1
             },
             {
                 id: 9,
                 title: "Развлекательный центр",
-                price: "2 900 000 сум",
+                price: "2900000",
                 image: slayd1
             },
             {
                 id: 10,
                 title: "Абстрактная картина",
-                price: "1 100 000 сум",
+                price: "1100000",
                 image: slayd1
             }
         ]
@@ -141,14 +141,17 @@ const Recommend = () => {
                                             </div>
                                             <b>{item.title}</b>
                                             <div className={styles.price}>
-                                                <p>{item.price}</p>
+                                                <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                 <button onClick={() => {
                                                     if (!cart.some(cartItem => cartItem.id === item.id)) {
-                                                        setCart([...cart, item]);
+                                                        setCart([...cart, { ...item, quantity: 1 }]);
+                                                        setMessage(true);
+                                                        setMessageType('success');
+                                                        setMessageText("Mahsulot savatga qo'shildi");
                                                     } else {
-                                                        setMessageText("Mahsulot savatga qo'shilgan")
-                                                        setMessage(true)
-                                                        setMessageType('warning')
+                                                        setMessageText("Mahsulot savatga qo'shilgan");
+                                                        setMessage(true);
+                                                        setMessageType('warning');
                                                     }
                                                 }}>
                                                     <i className="fa-solid fa-cart-shopping"></i>
@@ -216,14 +219,17 @@ const Recommend = () => {
                                             </div>
                                             <b>{item.title}</b>
                                             <div className={styles.price}>
-                                                <p>{item.price}</p>
+                                                <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                 <button onClick={() => {
                                                     if (!cart.some(cartItem => cartItem.id === item.id)) {
-                                                        setCart([...cart, item]);
+                                                        setCart([...cart, { ...item, quantity: 1 }]);
+                                                        setMessage(true);
+                                                        setMessageType('success');
+                                                        setMessageText("Mahsulot savatga qo'shildi");
                                                     } else {
-                                                        setMessageText("Mahsulot savatga qo'shilgan")
-                                                        setMessage(true)
-                                                        setMessageType('warning')
+                                                        setMessageText("Mahsulot savatga qo'shilgan");
+                                                        setMessage(true);
+                                                        setMessageType('warning');
                                                     }
                                                 }}>
                                                     <i className="fa-solid fa-cart-shopping"></i>

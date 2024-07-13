@@ -1,0 +1,160 @@
+@import "../../../../assets/variables";
+
+.register {
+    padding-bottom: 4rem;
+
+    &__item {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 20px;
+
+        &__left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            &__header {
+                box-shadow: $shadow;
+                border-radius: 10px;
+                padding: .5rem 1rem;
+            }
+
+            &__content {
+                box-shadow: $shadow;
+                border-radius: 10px;
+                padding: .5rem 1rem;
+
+                &__top {
+                    display: flex;
+
+                    &__left {
+                        flex: 1;
+
+                        &__form {
+                            width: 70%;
+                            background-color: $white;
+                            padding: 2rem 1rem;
+                            border-radius: 1rem;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2rem;
+
+                            .inputContainer {
+                                position: relative;
+                                width: 100%;
+                                margin-bottom: 1rem;
+                            }
+
+                            input {
+                                width: 100%;
+                                padding: 10px 16px;
+                                font-size: 16px;
+                                border: 1px solid #11101666;
+                                border-radius: 5px;
+                                transition: all 0.3s;
+                                color: #777;
+                                font-weight: 500;
+                            }
+
+                            .placeholder {
+                                position: absolute;
+                                top: 50%;
+                                left: 15px;
+                                transform: translateY(-50%);
+                                font-size: 16px;
+                                font-weight: 500;
+                                color: #777;
+                                background-color: $white;
+                                padding: 0 5px;
+                                transition: all 0.3s;
+                                pointer-events: none;
+                            }
+
+                            .active {
+                                transform: translateY(-150%);
+                                margin-top: -12px;
+                                font-size: 12px;
+                                color: #777;
+                            }
+
+                            .submitButton {
+                                width: 100%;
+                                border-radius: 0.5rem;
+                                font-size: 16px;
+                                font-weight: 700;
+                                padding: 0.7rem;
+                                color: $white;
+                                background-color: $red;
+                                border: 2px solid $red;
+                                cursor: pointer;
+                                transition: $transition;
+
+                                &:hover {
+                                    background-color: $white;
+                                    color: $red;
+                                }
+                            }
+                        }
+                    }
+
+                    &__right {
+                        width: 300px;
+                        border-radius: .5rem;
+
+                        &__content {
+                            background-color: $white;
+                            border-radius: .5rem;
+                            padding: 1rem 1rem 2rem;
+                            display: flex;
+                            align-items: start;
+                            flex-direction: column;
+                            justify-content: space-between;
+
+                            h3 {
+                                padding: 1rem 0;
+                                font-weight: 600;
+                            }
+
+                            span {
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                border-top: 1px solid $border-color;
+                                padding: 1rem 0;
+                                font-weight: 500;
+                            }
+
+                            .btn {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-top: 1rem;
+                                width: 100%;
+                                border: 2px solid $red;
+                                padding: .7rem 1rem;
+                                border-radius: .5rem;
+                                cursor: pointer;
+                                transition: $transition;
+                                color: $white;
+                                background-color: $red;
+                                font-weight: 500;
+
+
+                                &:hover {
+                                    background-color: $white;
+                                    color: $red;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &__right {
+            width: 320px;
+        }
+    }
+}

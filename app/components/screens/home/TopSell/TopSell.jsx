@@ -21,25 +21,25 @@ const TopSell = () => {
             {
                 id: 1,
                 title: "Malibu rul SUPER 3000 X1 5W-40",
-                price: "1 850 000 сум",
+                price: "1850000",
                 image: slayd1
             },
             {
                 id: 2,
                 title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "2 300 000 сум",
+                price: "2300000",
                 image: slayd1
             },
             {
                 id: 3,
                 title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "3 500 000 сум",
+                price: "3500000",
                 image: slayd1
             },
             {
                 id: 4,
                 title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "1 700 000 сум",
+                price: "1700000",
                 image: slayd1
             }
         ]
@@ -106,14 +106,17 @@ const TopSell = () => {
 
                                                 <b className={styles.title}>{item.title}</b>
                                                 <div className={styles.item}>
-                                                    <p>{item.price}</p>
+                                                    <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                     <span onClick={() => {
                                                         if (!cart.some(cartItem => cartItem.id === item.id)) {
-                                                            setCart([...cart, item]);
+                                                            setCart([...cart, { ...item, quantity: 1 }]);
+                                                            setMessage(true);
+                                                            setMessageType('success');
+                                                            setMessageText("Mahsulot savatga qo'shildi");
                                                         } else {
-                                                            setMessageText("Mahsulot savatga qo'shilgan")
-                                                            setMessage(true)
-                                                            setMessageType('warning')
+                                                            setMessageText("Mahsulot savatga qo'shilgan");
+                                                            setMessage(true);
+                                                            setMessageType('warning');
                                                         }
                                                     }}>
                                                         <i className="fa-solid fa-cart-shopping"></i>
