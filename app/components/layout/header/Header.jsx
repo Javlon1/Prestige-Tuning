@@ -25,12 +25,12 @@ const Header = () => {
         },
         {
             id: 3,
-            link: '#',
+            link: '#about',
             nav: "Biz haqimizda"
         },
         {
             id: 4,
-            link: '#',
+            link: '#contact',
             nav: "Bog’lanish"
         },
     ]);
@@ -165,18 +165,10 @@ const Header = () => {
                             <ul className={`${styles.list} ${ham ? styles.navActive : ""}`}>
                                 {
                                     headerData?.map((item) => (
-                                        <li key={item.id} className={styles.list__item}
+                                        <li onClick={() => setham(false)} key={item.id} className={styles.list__item}
                                         >
                                             {
-                                                item.link === '#' ? (
-
-                                                    <a
-                                                        className={`${pathname === item.link ? styles.active : ""}`}
-                                                        href={item.link}
-                                                    >
-                                                        {item.nav}
-                                                    </a>
-                                                ) : item.link === '@prestigecartuning_x_admin (https://t.me/prestigecartuning_x_admin)' ? (
+                                                item.link === '@prestigecartuning_x_admin (https://t.me/prestigecartuning_x_admin)' ? (
                                                     <a
                                                         className={`${pathname === item.link ? styles.active : ""}`}
                                                         href="https://t.me/prestigecartuning_x_admin"

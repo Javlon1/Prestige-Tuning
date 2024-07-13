@@ -10,7 +10,7 @@ const About = () => {
     const { lan } = React.useContext(Context);
 
     return (
-        <section className={styles.about}>
+        <section id='about' className={styles.about}>
             <MyContainer>
                 <div className={styles.about__item}>
                     <div className={styles.about__item__left}>

@@ -8,13 +8,13 @@
     justify-content: center;
     position: fixed;
     z-index: 1000;
-    bottom: 30px;
-    right: 30px;
-    background-color: $black;
-    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
+    background-color: $red;
+    border-radius: 10%;
     cursor: pointer;
     visibility: hidden;
-    box-shadow: inset 0 0 10px #000;
+    box-shadow: inset 0 0 10px $red;
     opacity: 0;
     transition: .2s;
     transform: translateY(25px);
@@ -30,8 +30,8 @@
     .scrollUp {
         width: 40px;
         height: 40px;
-        bottom: 25px;
-        right: 25px;
+        bottom: 15px;
+        right: 15px;
 
         span {
             font-size: 1.2rem;
