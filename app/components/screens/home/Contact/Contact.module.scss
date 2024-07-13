@@ -1,7 +1,7 @@
 @import "../../../../assets/variables";
 
 .contact {
-    padding: 100px 0;
+    padding: 0 0 50px;
 
     &__item {
         display: flex;
@@ -15,6 +15,131 @@
                 font-weight: 500;
             }
 
+        }
+
+        &__content {
+            margin-top: 1rem;
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 20px;
+
+            &__left {
+                width: 50%;
+                height: 23rem;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                &__address {
+                    font-size: 1.1rem;
+                    font-weight: 500;
+
+                    span {
+                        font-weight: 600;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+
+            &__right {
+                width: 45%;
+
+                &__form {
+                    width: 70%;
+                    background-color: $white;
+                    padding: 2rem 1rem;
+                    border: 1px solid $gray;
+                    border-radius: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
+
+                    .inputContainer {
+                        position: relative;
+                        width: 100%;
+                        margin-bottom: 1rem;
+                    }
+
+                    input {
+                        width: 100%;
+                        padding: 16px;
+                        font-size: 16px;
+                        border: 1px solid #11101666;
+                        border-radius: 8px;
+                        transition: all 0.3s;
+                        color: #777;
+                        font-size: 15px;
+                        font-weight: 500;
+                    }
+
+                    .placeholder {
+                        position: absolute;
+                        top: 50%;
+                        left: 15px;
+                        transform: translateY(-50%);
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: #777;
+                        background-color: $white;
+                        padding: 0 5px;
+                        transition: all 0.3s;
+                    }
+
+                    input:focus+.placeholder {
+                        transform: translateY(-150%);
+                        margin-top: -12px;
+                        font-size: 12px;
+                        color: #777;
+                        background-color: $white;
+                    }
+
+                    .submitButton {
+                        width: 100%;
+                        border-radius: .5rem;
+                        font-size: 16px;
+                        font-weight: 700;
+                        padding: .7rem;
+                        color: $white;
+                        background-color: $red;
+                        border: 2px solid $red;
+                        cursor: pointer;
+                        transition: $transition;
+
+                        &:hover {
+                            background-color: $white;
+                            color: $red;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .contact {
+        &__item {
+            &__content {
+                margin-top: 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+
+                &__left {
+                    width: 100%;
+                }
+
+                &__right {
+                    width: 100%;
+
+                    &__form {
+                        margin-top: 1rem;
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
 }
