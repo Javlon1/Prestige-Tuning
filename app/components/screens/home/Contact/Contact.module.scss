@@ -1,0 +1,20 @@
+@import "../../../../assets/variables";
+
+.contact {
+    padding: 100px 0;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        gap: 20px;
+
+        &__title {
+            h2 {
+                @include content;
+                font-weight: 500;
+            }
+
+        }
+    }
+}

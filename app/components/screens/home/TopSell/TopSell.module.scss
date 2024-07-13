@@ -15,9 +15,26 @@
             gap: 20px;
             justify-content: space-between;
 
-            h3 {
-                @include content;
-                font-weight: 500;
+            &__title {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                p {
+                    @include content;
+                    font-weight: 500;
+                }
+
+                i {
+                    width: 40px;
+                    height: 40px;
+                    color: $white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.1rem;
+                    background-color: $red;
+                }
             }
 
             a {
@@ -263,6 +280,21 @@
 
 @media only screen and (max-width: 767px) {
     .topSell {
+
+
+        &__item {
+            &__top {
+                &__title {
+                    gap: 10px;
+
+                    i {
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+            }
+        }
+
         &__sale {
             &__item {
                 height: 200px;

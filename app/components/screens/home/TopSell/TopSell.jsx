@@ -49,7 +49,11 @@ const TopSell = () => {
             <MyContainer>
                 <div className={styles.topSell__item}>
                     <div className={styles.topSell__item__top}>
-                        <h3>Ko’p sotilayotgan tovarlar</h3>
+                        <div className={styles.topSell__item__top__title}>
+                            <p>Ko’p sotilayotgan tovarlar</p>
+
+                            <i className="fa-regular fa-star"></i>
+                        </div>
                         <Link href={'/'}>
                             Barchasi
                             <i className="fa-solid fa-arrow-right-long"></i>
@@ -63,7 +67,6 @@ const TopSell = () => {
                                 prevEl: `.${styles.btn__next}`,
                                 nextEl: `.${styles.btn__prev}`,
                             }}
-                            loop={true}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 1,

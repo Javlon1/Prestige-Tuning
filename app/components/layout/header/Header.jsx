@@ -15,7 +15,7 @@ const Header = () => {
     const [headerData] = React.useState([
         {
             id: 1,
-            link: '/',
+            link: '@prestigecartuning_x_admin (https://t.me/prestigecartuning_x_admin)',
             nav: "Tuning xizmatlari"
         },
         {
@@ -173,6 +173,15 @@ const Header = () => {
                                                     <a
                                                         className={`${pathname === item.link ? styles.active : ""}`}
                                                         href={item.link}
+                                                    >
+                                                        {item.nav}
+                                                    </a>
+                                                ) : item.link === '@prestigecartuning_x_admin (https://t.me/prestigecartuning_x_admin)' ? (
+                                                    <a
+                                                        className={`${pathname === item.link ? styles.active : ""}`}
+                                                        href="https://t.me/prestigecartuning_x_admin"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
                                                     >
                                                         {item.nav}
                                                     </a>
