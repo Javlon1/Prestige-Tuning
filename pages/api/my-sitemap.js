@@ -6,6 +6,7 @@ export default async (req, res) => {
 
     const links = [
         { url: "/", changefreq: "daily", priority: 1 },
+        { url: "/cart", changefreq: "daily", priority: 0 },
     ];
 
     const stream = new SitemapStream({ hostname: `https://${req.headers.host}` })

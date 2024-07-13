@@ -11,9 +11,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import Message from '@/app/components/ui/Message/Message';
 
 const Recommend = () => {
-    const { lan } = React.useContext(Context);
+    const { cart, setCart, setMessage, messageType, setMessageType, messageText, setMessageText } = React.useContext(Context);
     const [popularData] = React.useState([{ id: 1, nav_en: 'Popular products', nav_ru: 'Популярные товары', nav_uz: 'Ommabop tovarlar' }]);
     const [recommendData] = React.useState([{ id: 1, nav_en: 'We recommend', nav_ru: 'Мы рекомендуем', nav_uz: 'Biz tavsiya qilamiz' }]);
     const [byData] = React.useState([{ id: 1, nav_en: 'Buy', nav_ru: 'Купить', nav_uz: 'Sotib olish' }]);
@@ -81,9 +82,11 @@ const Recommend = () => {
             }
         ]
     )
+
     return (
         <section className={styles.products}>
             <MyContainer>
+                <Message messages={messageText} type={messageType} />
                 <div className={styles.products__item}>
                     <div className={styles.products__item__header}>
                         <div className={styles.products__item__header__title}>
@@ -139,7 +142,15 @@ const Recommend = () => {
                                             <b>{item.title}</b>
                                             <div className={styles.price}>
                                                 <p>{item.price}</p>
-                                                <button>
+                                                <button onClick={() => {
+                                                    if (!cart.some(cartItem => cartItem.id === item.id)) {
+                                                        setCart([...cart, item]);
+                                                    } else {
+                                                        setMessageText("Mahsulot savatga qo'shilgan")
+                                                        setMessage(true)
+                                                        setMessageType('warning')
+                                                    }
+                                                }}>
                                                     <i className="fa-solid fa-cart-shopping"></i>
                                                 </button>
                                             </div>
@@ -206,7 +217,15 @@ const Recommend = () => {
                                             <b>{item.title}</b>
                                             <div className={styles.price}>
                                                 <p>{item.price}</p>
-                                                <button>
+                                                <button onClick={() => {
+                                                    if (!cart.some(cartItem => cartItem.id === item.id)) {
+                                                        setCart([...cart, item]);
+                                                    } else {
+                                                        setMessageText("Mahsulot savatga qo'shilgan")
+                                                        setMessage(true)
+                                                        setMessageType('warning')
+                                                    }
+                                                }}>
                                                     <i className="fa-solid fa-cart-shopping"></i>
                                                 </button>
                                             </div>

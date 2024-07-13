@@ -11,9 +11,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import Message from '@/app/components/ui/Message/Message';
 
 const TopSell = () => {
-    const { lan } = React.useContext(Context);
+    const { cart, setCart, setMessage, messageType, setMessageType, messageText, setMessageText } = React.useContext(Context);
 
     const [data] = React.useState(
         [
@@ -47,6 +48,7 @@ const TopSell = () => {
     return (
         <section className={styles.topSell}>
             <MyContainer>
+                <Message messages={messageText} type={messageType} />
                 <div className={styles.topSell__item}>
                     <div className={styles.topSell__item__top}>
                         <div className={styles.topSell__item__top__title}>
@@ -105,9 +107,17 @@ const TopSell = () => {
                                                 <b className={styles.title}>{item.category}</b>
                                                 <div className={styles.item}>
                                                     <p>{item.price}</p>
-                                                    <span>
+                                                    <span onClick={() => {
+                                                        if (!cart.some(cartItem => cartItem.id === item.id)) {
+                                                            setCart([...cart, item]);
+                                                        } else {
+                                                            setMessageText("Mahsulot savatga qo'shilgan")
+                                                            setMessage(true)
+                                                            setMessageType('warning')
+                                                        }
+                                                    }}>
                                                         <i className="fa-solid fa-cart-shopping"></i>
-                                                    </span>
+                                                    </span> 
                                                 </div>
                                             </div>
                                         </div>

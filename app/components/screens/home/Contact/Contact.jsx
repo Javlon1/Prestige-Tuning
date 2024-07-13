@@ -4,29 +4,42 @@ import Image from 'next/image'
 import styles from './Contact.module.scss'
 import { Context } from '@/app/components/ui/Context/Context';
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
+import Message from '@/app/components/ui/Message/Message';
 
 
 const Contact = () => {
-    const { lan } = React.useContext(Context);
-    const [formData, setFormData] = React.useState({
-        name: '',
-        phone: ''
-    });
+    const { setMessage, messageType, setMessageType, messageText, setMessageText } = React.useContext(Context);
+    const [formData, setFormData] = React.useState({ name: '', phone: '' });
+    const [focused, setFocused] = React.useState({ name: false, phone: false });
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.id]: e.target.value
-        });
+        const { id, value } = e.target;
+        setFormData({ ...formData, [id]: value });
+    };
+
+    const handleFocus = (e) => {
+        const { id } = e.target;
+        setFocused({ ...focused, [id]: true });
+    };
+
+    const handleBlur = (e) => {
+        const { id } = e.target;
+        if (!formData[id]) {
+            setFocused({ ...focused, [id]: false });
+        }
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
+        setMessage(true)
+        setMessageType('success')
+        setMessageText('Xabaringiz qabul qilindi!')
     };
 
     return (
         <section id='contact' className={styles.contact}>
             <MyContainer>
+                <Message messages={messageText} type={messageType} />
                 <div className={styles.contact__item}>
                     <div className={styles.contact__item__title}>
                         <h2>Manzil va bog’lanish</h2>
@@ -39,16 +52,23 @@ const Contact = () => {
                         <div className={styles.contact__item__content__right}>
                             <div className={styles.contact__item__content__right__form}>
                                 <h3>Bog’lanish formasi</h3>
-                                <form onSubmit={handleSubmit}>
+                                <form onSubmit={handleSubmit} className={styles.form}>
                                     <div className={styles.inputContainer}>
                                         <input
                                             type="text"
                                             id="name"
                                             value={formData.name}
                                             onChange={handleChange}
+                                            onFocus={handleFocus}
+                                            onBlur={handleBlur}
                                             required
                                         />
-                                        <label htmlFor="name" className={styles.placeholder}>Ismingizni yozing</label>
+                                        <label
+                                            htmlFor="name"
+                                            className={`${styles.placeholder} ${focused.name || formData.name ? styles.active : ''}`}
+                                        >
+                                            Ismingizni yozing
+                                        </label>
                                     </div>
                                     <div className={styles.inputContainer}>
                                         <input
@@ -56,9 +76,16 @@ const Contact = () => {
                                             id="phone"
                                             value={formData.phone}
                                             onChange={handleChange}
+                                            onFocus={handleFocus}
+                                            onBlur={handleBlur}
                                             required
                                         />
-                                        <label htmlFor="phone" className={styles.placeholder}>Telefon raqamingiz kiriting</label>
+                                        <label
+                                            htmlFor="phone"
+                                            className={`${styles.placeholder} ${focused.phone || formData.phone ? styles.active : ''}`}
+                                        >
+                                            Telefon raqamingizni yozing
+                                        </label>
                                     </div>
                                     <button type="submit" className={styles.submitButton}>Qo’ng’iroq buyurtma qilish</button>
                                 </form>

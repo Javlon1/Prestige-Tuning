@@ -1,0 +1,33 @@
+@import "../../../assets/variables";
+
+.messag {
+    position: fixed;
+    z-index: 999;
+    background-color: transparent;
+    padding: .4rem 1rem;
+    border-radius: 5px;
+    top: 10rem;
+    right: -100rem;
+    color: $white;
+    font-weight: 500;
+    transition: all .3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.messageAct {
+    right: 1rem !important;
+}
+
+.messageWarning {
+    background-color: $orange;
+}
+
+.messageError {
+    background-color: $red;
+}
+
+.messageSuccess {
+    background-color: $green;
+}

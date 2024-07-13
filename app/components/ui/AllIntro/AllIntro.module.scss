@@ -1,0 +1,17 @@
+@import "../../../assets/variables";
+
+.allIntro {
+    padding: 2rem 0;
+
+    h1 {
+        @include content;
+        font-weight: 500;
+        color: $black;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .allIntro {
+        padding: 1rem 0;
+    }
+}
