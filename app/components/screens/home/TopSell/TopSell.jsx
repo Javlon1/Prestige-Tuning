@@ -20,25 +20,25 @@ const TopSell = () => {
         [
             {
                 id: 1,
-                category: "Malibu rul SUPER 3000 X1 5W-40",
+                title: "Malibu rul SUPER 3000 X1 5W-40",
                 price: "1 850 000 сум",
                 image: slayd1
             },
             {
                 id: 2,
-                category: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
+                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
                 price: "2 300 000 сум",
                 image: slayd1
             },
             {
                 id: 3,
-                category: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
+                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
                 price: "3 500 000 сум",
                 image: slayd1
             },
             {
                 id: 4,
-                category: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
+                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
                 price: "1 700 000 сум",
                 image: slayd1
             }
@@ -104,7 +104,7 @@ const TopSell = () => {
                                                     priority
                                                 />
 
-                                                <b className={styles.title}>{item.category}</b>
+                                                <b className={styles.title}>{item.title}</b>
                                                 <div className={styles.item}>
                                                     <p>{item.price}</p>
                                                     <span onClick={() => {
@@ -117,7 +117,7 @@ const TopSell = () => {
                                                         }
                                                     }}>
                                                         <i className="fa-solid fa-cart-shopping"></i>
-                                                    </span> 
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
