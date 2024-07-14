@@ -123,33 +123,7 @@ const Header = () => {
                             </button>
                             <ul className={`${styles.catalog} ${catalog ? styles.catalogAct : ""}`}>
                                 <li className={styles.catalog__item}>
-                                    <Link href={'/'}>
-                                        <Image
-                                            src={orginal}
-                                            width={20}
-                                            height={20}
-                                            alt='dots'
-                                        />
-                                        <p>
-                                            Оригинальные запчасти
-                                        </p>
-                                    </Link>
-                                </li>
-                                <li className={styles.catalog__item}>
-                                    <Link href={'/'}>
-                                        <Image
-                                            src={orginal}
-                                            width={20}
-                                            height={20}
-                                            alt='dots'
-                                        />
-                                        <p>
-                                            Оригинальные запчасти
-                                        </p>
-                                    </Link>
-                                </li>
-                                <li className={styles.catalog__item}>
-                                    <Link href={'/'}>
+                                    <Link onClick={() => setCatalog(false)} href={'/catalog'}>
                                         <Image
                                             src={orginal}
                                             width={20}

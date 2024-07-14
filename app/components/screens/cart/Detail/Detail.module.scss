@@ -168,29 +168,8 @@
         }
     }
 
-    &__content {
-        margin: 5rem 0;
-        padding: 4rem 0;
-        background-color: $black;
-
-        &__list {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            &__item {
-                display: flex;
-                flex-direction: column;
-                background-color: $white;
-                padding: 1rem;
-                align-items: center;
-                gap: 10px;
-            }
-        }
-    }
-
     &__item {
-        margin-top: 2rem;
+        margin-top: 3rem;
 
         &__header {
             display: flex;

@@ -129,9 +129,9 @@ const Detail = () => {
                                         <Swiper
                                             onSwiper={setThumbsSwiper}
                                             spaceBetween={10}
-                                            slidesPerView={4}
-                                            freeMode={true}
-                                            watchSlidesProgress={true}
+                                            slidesPerView={item.images.length > 4 ? 4 : item.images.length}
+                                            // freeMode={true}
+                                            // watchSlidesProgress={true}
                                             modules={[FreeMode, Navigation, Thumbs]}
                                             className="mySwiper"
                                         >
@@ -215,24 +215,6 @@ const Detail = () => {
                     }
                 </div>
             </MyContainer>
-            <div className={styles.detail__content}>
-                <MyContainer>
-                    <ul className={styles.detail__content__list}>
-                        <li className={styles.detail__content__list__item}>
-
-                        </li>
-                        <li className={styles.detail__content__list__item}>
-
-                        </li>
-                        <li className={styles.detail__content__list__item}>
-
-                        </li>
-                        <li className={styles.detail__content__list__item}>
-
-                        </li>
-                    </ul>
-                </MyContainer>
-            </div>
             <MyContainer>
                 <div className={styles.detail__item}>
                     <div className={styles.detail__item__header}>
