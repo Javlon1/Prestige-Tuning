@@ -19,6 +19,7 @@ const Intro = () => {
     return (
         <section className={styles.intro}>
             <MyContainer>
+                <h1>Prestic tuning</h1>
                 <div className={styles['swiper-container']}>
                     <Swiper
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
