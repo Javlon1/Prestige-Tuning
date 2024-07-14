@@ -12,8 +12,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Message from '@/app/components/ui/Message/Message';
+import { useRouter } from 'next/router';
 
 const Recommend = () => {
+    const router = useRouter();
     const { cart, setCart, setMessage, messageType, setMessageType, messageText, setMessageText } = React.useContext(Context);
     const [popularData] = React.useState([{ id: 1, nav_en: 'Popular products', nav_ru: 'Популярные товары', nav_uz: 'Ommabop tovarlar' }]);
     const [recommendData] = React.useState([{ id: 1, nav_en: 'We recommend', nav_ru: 'Мы рекомендуем', nav_uz: 'Biz tavsiya qilamiz' }]);
@@ -142,18 +144,9 @@ const Recommend = () => {
                                             <b>{item.title}</b>
                                             <div className={styles.price}>
                                                 <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
-                                                <button onClick={() => {
-                                                    if (!cart.some(cartItem => cartItem.id === item.id)) {
-                                                        setCart([...cart, { ...item, quantity: 1 }]);
-                                                        setMessage(true);
-                                                        setMessageType('success');
-                                                        setMessageText("Mahsulot savatga qo'shildi");
-                                                    } else {
-                                                        setMessageText("Mahsulot savatga qo'shilgan");
-                                                        setMessage(true);
-                                                        setMessageType('warning');
-                                                    }
-                                                }}>
+                                                <button onClick={() =>
+                                                    router.push("/catalog-detail")
+                                                }>
                                                     <i className="fa-solid fa-cart-shopping"></i>
                                                 </button>
                                             </div>
@@ -220,18 +213,9 @@ const Recommend = () => {
                                             <b>{item.title}</b>
                                             <div className={styles.price}>
                                                 <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
-                                                <button onClick={() => {
-                                                    if (!cart.some(cartItem => cartItem.id === item.id)) {
-                                                        setCart([...cart, { ...item, quantity: 1 }]);
-                                                        setMessage(true);
-                                                        setMessageType('success');
-                                                        setMessageText("Mahsulot savatga qo'shildi");
-                                                    } else {
-                                                        setMessageText("Mahsulot savatga qo'shilgan");
-                                                        setMessage(true);
-                                                        setMessageType('warning');
-                                                    }
-                                                }}>
+                                                <button onClick={() =>
+                                                    router.push("/catalog-detail")
+                                                }>
                                                     <i className="fa-solid fa-cart-shopping"></i>
                                                 </button>
                                             </div>

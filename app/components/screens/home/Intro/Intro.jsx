@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Link from 'next/link'
 import Image from 'next/image'
 import styles from './Intro.module.scss'
 import { Context } from '@/app/components/ui/Context/Context';

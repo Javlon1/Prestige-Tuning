@@ -12,8 +12,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Message from '@/app/components/ui/Message/Message';
+import { useRouter } from 'next/router';
 
 const TopSell = () => {
+    const router = useRouter();
     const { cart, setCart, setMessage, messageType, setMessageType, messageText, setMessageText } = React.useContext(Context);
 
     const [data] = React.useState(
@@ -108,16 +110,7 @@ const TopSell = () => {
                                                 <div className={styles.item}>
                                                     <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                     <span onClick={() => {
-                                                        if (!cart.some(cartItem => cartItem.id === item.id)) {
-                                                            setCart([...cart, { ...item, quantity: 1 }]);
-                                                            setMessage(true);
-                                                            setMessageType('success');
-                                                            setMessageText("Mahsulot savatga qo'shildi");
-                                                        } else {
-                                                            setMessageText("Mahsulot savatga qo'shilgan");
-                                                            setMessage(true);
-                                                            setMessageType('warning');
-                                                        }
+                                                        router.push('/catalog-detail');
                                                     }}>
                                                         <i className="fa-solid fa-cart-shopping"></i>
                                                     </span>

@@ -44,9 +44,8 @@ const Cart = () => {
                                         ? cart.map((item) => (
                                             <li className={styles.cart__item__left__content__list__item} key={item.id}>
                                                 <div className={styles.title}>
-                                                    <input type="checkbox" name="" id="" />
                                                     <Image
-                                                        src={item.image}
+                                                        src={item.images[0]?.image}
                                                         alt='slayd1'
                                                         width={100}
                                                         height={90}
