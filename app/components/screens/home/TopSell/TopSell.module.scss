@@ -249,6 +249,22 @@
     .topSell {
         padding: 50px 0;
 
+        &__item {
+            &__bottom {
+                &__obj {
+                    &__item {
+                        height: auto;
+                    }
+                }
+
+                &__cart {
+                    &__item {
+                        height: auto;
+                    }
+                }
+            }
+        }
+
         &__sale {
             margin-top: 1rem;
 
@@ -280,8 +296,6 @@
 
 @media only screen and (max-width: 767px) {
     .topSell {
-
-
         &__item {
             &__top {
                 &__title {
