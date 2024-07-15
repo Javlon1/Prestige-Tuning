@@ -53,6 +53,20 @@
             padding-left: 3rem;
             gap: 5px;
 
+            .paginationItem {
+                cursor: pointer;
+                width: 60px;
+                height: 5px;
+                margin: 0 5px;
+                background-color: #ddd;
+                border-radius: 10px;
+                transition: background-color 0.3s ease;
+            }
+
+            .paginationItem.active {
+                background-color: #555;
+                color: white;
+            }
         }
 
 

@@ -28,7 +28,13 @@ const Intro = () => {
                             nextEl: `.${styles['swiper-button-next-custom']}`,
                             prevEl: `.${styles['swiper-button-prev-custom']}`
                         }}
-                        pagination={{ clickable: true, el: `.${styles['swiper-pagination-custom']}` }}
+                        pagination={{
+                            clickable: true,
+                            el: `.${styles['swiper-pagination-custom']}`,
+                            renderBullet: function (index, className) {
+                                return `<div class="${className} ${styles.paginationItem}"></div>`;
+                            }
+                        }}
                         loop={true}
                     >
                         <SwiperSlide>
@@ -72,7 +78,7 @@ const Intro = () => {
                     <div className={styles['swiper-button-next-custom']}>
                         <i className="fa-solid fa-angle-right"></i>
                     </div>
-                    <div className={styles['swiper-pagination-custom']}></div>
+                    <div className={styles['swiper-pagination-custom']} />
                 </div>
             </MyContainer>
         </section>
