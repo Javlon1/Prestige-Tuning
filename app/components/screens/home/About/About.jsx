@@ -28,7 +28,10 @@ const About = () => {
                                 <p><span>Malakali</span> usta va ishchilar ishlaydi</p>
                             </div>
                         </div>
-                        <button type='button'>Bog’lanish</button>
+
+                        <a className={styles.btn} href="tel:+998987000021">
+                            Bog’lanish
+                        </a>
                     </div>
                     <div className={styles.about__item__right}>
                         <Image

@@ -141,7 +141,7 @@ const Recommend = () => {
                                                     priority
                                                 />
                                             </div>
-                                            <b>{item.title}</b>
+                                            <b onClick={() => router.push("/catalog-detail")}>{item.title}</b>
                                             <div className={styles.price}>
                                                 <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                 <button type='button' onClick={() =>
@@ -211,7 +211,7 @@ const Recommend = () => {
                                                     priority
                                                 />
                                             </div>
-                                            <b>{item.title}</b>
+                                            <b onClick={() => router.push("/catalog-detail")}>{item.title}</b>
                                             <div className={styles.price}>
                                                 <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                 <button type='button' onClick={() =>

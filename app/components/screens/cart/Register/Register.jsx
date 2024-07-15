@@ -30,8 +30,6 @@ const Register = () => {
         house: false,
         additionalInfo: false
     });
-    const [isPhoneValid, setIsPhoneValid] = React.useState(true);
-
     const formatPhoneNumber = (number) => {
         let newValue = number.replace(/\D/g, '');
 
@@ -56,8 +54,6 @@ const Register = () => {
 
         if (id === 'phone') {
             const formattedPhone = formatPhoneNumber(value);
-            const phonePattern = /^998 \d{2} \d{3} \d{2} \d{2}$/;
-            setIsPhoneValid(phonePattern.test(formattedPhone));
             setFormData({ ...formData, [id]: formattedPhone });
         } else {
             setFormData({ ...formData, [id]: value });

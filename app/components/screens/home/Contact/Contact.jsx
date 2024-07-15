@@ -12,10 +12,36 @@ const Contact = () => {
     const [formData, setFormData] = React.useState({ name: '', phone: '' });
     const [focused, setFocused] = React.useState({ name: false, phone: false });
 
+    const formatPhoneNumber = (number) => {
+        let newValue = number.replace(/\D/g, '');
+
+        if (!newValue.startsWith('998')) {
+            newValue = '998' + newValue;
+        }
+
+        if (newValue.length > 12) {
+            newValue = newValue.slice(0, 12);
+        }
+
+        if (newValue.length > 3) newValue = newValue.replace(/^(\d{3})(\d+)/, '$1 $2');
+        if (newValue.length > 6) newValue = newValue.replace(/^(\d{3}) (\d{2})(\d+)/, '$1 $2 $3');
+        if (newValue.length > 9) newValue = newValue.replace(/^(\d{3}) (\d{2}) (\d{3})(\d+)/, '$1 $2 $3 $4');
+        if (newValue.length > 11) newValue = newValue.replace(/^(\d{3}) (\d{2}) (\d{3}) (\d{2})(\d+)/, '$1 $2 $3 $4 $5');
+
+        return newValue.trim();
+    };
+
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
+
+        if (id === 'phone') {
+            const formattedPhone = formatPhoneNumber(value);
+            setFormData({ ...formData, [id]: formattedPhone });
+        } else {
+            setFormData({ ...formData, [id]: value });
+        }
     };
+    // console.log(formData.phone.replace(/\s/g, ''));
 
     const handleFocus = (e) => {
         const { id } = e.target;
@@ -79,7 +105,7 @@ const Contact = () => {
                                     </div>
                                     <div className={styles.inputContainer}>
                                         <input
-                                            type="number"
+                                            type="text"
                                             id="phone"
                                             value={formData.phone}
                                             onChange={handleChange}

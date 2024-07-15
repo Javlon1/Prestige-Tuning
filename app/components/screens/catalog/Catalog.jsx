@@ -270,7 +270,9 @@ const Catalog = () => {
                                                         priority
                                                     />
                                                 </div>
-                                                <b>{item.title}</b>
+                                                <Link href={`/catalog-detail`}>
+                                                    <b>{item.title}</b>
+                                                </Link>
                                                 <div className={styles.price}>
                                                     <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                     <button type='button' onClick={() =>

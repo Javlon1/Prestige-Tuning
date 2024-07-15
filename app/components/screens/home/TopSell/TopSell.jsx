@@ -86,7 +86,7 @@ const TopSell = () => {
                         >
                             <SwiperSlide>
                                 <div className={styles.topSell__item__bottom__obj}>
-                                    <div className={styles.topSell__item__bottom__obj__item}>
+                                    <div onClick={() => router.push('/catalog-detail')} className={styles.topSell__item__bottom__obj__item}>
                                         <b className={styles.title}>Gentra OPTRA faralar sotuvda !</b>
                                         <Image
                                             src={slayd1}
@@ -108,8 +108,7 @@ const TopSell = () => {
                                                     alt='slayd'
                                                     priority
                                                 />
-
-                                                <b className={styles.title}>{item.title}</b> 
+                                                <b onClick={() => router.push('/catalog-detail')} className={styles.title}>{item.title}</b>
                                                 <div className={styles.item}>
                                                     <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                     <span onClick={() => {
