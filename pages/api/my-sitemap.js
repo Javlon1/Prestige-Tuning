@@ -6,6 +6,8 @@ export default async (req, res) => {
 
     const links = [
         { url: "/", changefreq: "daily", priority: 1 },
+        { url: "/catalog", changefreq: "daily", priority: 1 },
+        { url: "/catalog-detail", changefreq: "daily", priority: 0 },
         { url: "/cart", changefreq: "daily", priority: 0 },
         { url: "/register", changefreq: "daily", priority: 0 },
         { url: "/register-success", changefreq: "daily", priority: 0 },
