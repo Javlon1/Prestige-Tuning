@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 const Context = createContext()
 
 function Provider({ children }) {
@@ -12,7 +12,7 @@ function Provider({ children }) {
     return (
         <Context.Provider value={{
             url, cart, setCart, message, setMessage, messageType, setMessageType,
-            messageText, setMessageText
+            messageText, setMessageText,
         }}>
             {children}
         </Context.Provider>

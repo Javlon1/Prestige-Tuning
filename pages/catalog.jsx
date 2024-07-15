@@ -1,7 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
 import Catalog from '@/app/components/screens/catalog/Catalog';
-import AllIntro from '@/app/components/ui/AllIntro/AllIntro';
 
 const CatalogPage = () => {
 
@@ -14,7 +13,7 @@ const CatalogPage = () => {
                 <meta name="keywords" content="" /> // ключевые слова, страницы
                 <meta name="image_src" content="" /> // URL для img
 
-                <meta property="og:title" content="CatalogPage" /> // Название страницы
+                <meta property="og:title" content="Catalog-Page" /> // Название страницы
                 <meta property="og:description" content="" /> // Описание страницы
                 <meta property="og:image" content="" /> // URL для img: https://example.com/image.jpg
                 <meta property="og:url" content="" /> // оснавное URL: https://example.com/page-url
@@ -22,11 +21,10 @@ const CatalogPage = () => {
                 <meta property="og:site_name" content="" /> // Название сайта
                 <meta property="og:locale" content="ru_RU" />
 
-                <title>CatalogPage</title>
+                <title>katalog</title>
             </Head>
 
             <main>
-                <AllIntro text="katalog" />
                 <Catalog />
             </main>
         </>
