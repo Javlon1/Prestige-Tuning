@@ -16,6 +16,8 @@ const About = () => {
                     <div className={styles.about__item__left}>
                         <div className={styles.about__item__left__title}>
                             <h2>Biz haqimizda</h2>
+
+                            <i className="fa-regular fa-star"></i>
                         </div>
                         <div className={styles.about__item__left__content}>
                             <p><span>Prestige Tuning</span> Andijondagi sifatli va tezkor tuning markazlaridan biri hisoblanadi. Markaz quyidagi sifatlari bilan boshqa tuning xizmatlaridan ajralib turadi:</p>

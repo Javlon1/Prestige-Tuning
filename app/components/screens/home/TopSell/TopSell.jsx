@@ -58,7 +58,7 @@ const TopSell = () => {
 
                             <i className="fa-regular fa-star"></i>
                         </div>
-                        <Link href={'/'}>
+                        <Link href={'/catalog'}>
                             Barchasi
                             <i className="fa-solid fa-arrow-right-long"></i>
                         </Link>
@@ -67,6 +67,7 @@ const TopSell = () => {
                         <Swiper
                             modules={[Navigation, Scrollbar, A11y]}
                             spaceBetween={10}
+                            slidesPerView={4}
                             navigation={{
                                 prevEl: `.${styles.btn__next}`,
                                 nextEl: `.${styles.btn__prev}`,
@@ -92,6 +93,8 @@ const TopSell = () => {
                                             alt='slayd'
                                             priority
                                         />
+                                        <div></div>
+                                        <div></div>
                                     </div>
                                 </div>
                             </SwiperSlide>

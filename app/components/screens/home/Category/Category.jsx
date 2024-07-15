@@ -15,7 +15,7 @@ const Category = () => {
             <MyContainer>
                 <ul className={styles.category__list}>
                     <li className={styles.category__list__item}>
-                        <Link href={'/'}>
+                        <Link href={'/catalog'}>
                             <Image
                                 src={orginal}
                                 alt='category'
@@ -27,7 +27,7 @@ const Category = () => {
                         </Link>
                     </li>
                     <li className={styles.category__list__item}>
-                        <Link href={'/'}>
+                        <Link href={'/catalog'}>
                             <Image
                                 src={orginal}
                                 alt='category'
@@ -39,103 +39,7 @@ const Category = () => {
                         </Link>
                     </li>
                     <li className={styles.category__list__item}>
-                        <Link href={'/'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/'}>
+                        <Link href={'/catalog'}>
                             <div className={styles.img}>
                                 <Image
                                     src={category}

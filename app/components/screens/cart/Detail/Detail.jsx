@@ -190,7 +190,7 @@ const Detail = () => {
                                                     <i className="fa-solid fa-plus"></i>
                                                 </button>
                                             </div>
-                                        </label>
+                                        </label>    
                                     </div>
                                     <button
                                         onClick={() => {

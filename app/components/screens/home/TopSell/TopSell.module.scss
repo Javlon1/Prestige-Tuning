@@ -62,7 +62,6 @@
 
         &__bottom {
             display: flex;
-            align-items: center;
             justify-content: space-between;
             gap: 20px;
 
@@ -225,7 +224,6 @@
             img {
                 width: 200px;
                 height: 200px;
-                object-fit: cover;
                 position: absolute;
                 right: 0;
                 z-index: 2;
@@ -254,12 +252,20 @@
                 &__obj {
                     &__item {
                         height: auto;
+
+                        img {
+                            height: 290px;
+                        }
                     }
                 }
 
                 &__cart {
                     &__item {
                         height: auto;
+
+                        img {
+                            height: 290px;
+                        }
                     }
                 }
             }
@@ -311,10 +317,21 @@
 
         &__sale {
             &__item {
-                height: 200px;
+                height: 150px;
 
                 .title {
                     width: 100%;
+
+                    button {
+                        width: 100px;
+                        padding: .5rem;
+                    }
+                }
+
+                img {
+                    width: 100px;
+                    height: 100px;
+                    object-fit: contain;
                 }
 
                 &::before {
