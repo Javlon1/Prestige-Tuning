@@ -23,7 +23,7 @@ const CatalogPage = () => {
 
                 <link rel="canonical" href="https://prestigetuning.uz/catalog" />
 
-                <title>Katalog</title>
+                <title>Prestic tuning | Katalog</title>
             </Head>
 
             <main>

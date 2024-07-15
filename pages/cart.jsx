@@ -10,7 +10,7 @@ const CartPage = () => {
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.png" />
-                <title>Savatcha</title>
+                <title>Prestic tuning | Savatcha</title>
             </Head>
 
             <main>
