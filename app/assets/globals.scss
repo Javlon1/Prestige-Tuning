@@ -1,13 +1,12 @@
 @import '../assets/variables';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
     margin: 0;
     padding: 0;
-    outline: none;
     box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
-    // user-select: none;
+    user-select: none;
     scroll-behavior: smooth;
 }
 
@@ -22,14 +21,11 @@
 
 ::-webkit-scrollbar-thumb {
     background-color: $black;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-radius: 1rem;
 }
 
 input {
-    outline: #fff;
+    outline: none;
     padding-left: 10px;
 }
 
