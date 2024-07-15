@@ -178,20 +178,24 @@ const Detail = () => {
                                             <p>{item.paintType}</p>
                                         </li>
                                     </ul>
-                                    <div className={styles.right__items}>
-                                        <label>
-                                            <p>Miqdori</p>
-                                            <div className={styles.right__items__counter}>
-                                                <button onClick={() => { if (counter > 1) setCounter(counter -= 1) }}>
-                                                    <i className="fa-solid fa-minus"></i>
-                                                </button>
-                                                <p>{counter}</p>
-                                                <button onClick={() => setCounter(counter += 1)}>
-                                                    <i className="fa-solid fa-plus"></i>
-                                                </button>
+                                    {
+                                        (!cart.some(cartItem => cartItem.id === item.id)) && (
+                                            <div className={styles.right__items}>
+                                                <label>
+                                                    <p>Miqdori</p>
+                                                    <div className={styles.right__items__counter}>
+                                                        <button onClick={() => { if (counter > 1) setCounter(counter -= 1) }}>
+                                                            <i className="fa-solid fa-minus"></i>
+                                                        </button>
+                                                        <p>{counter}</p>
+                                                        <button onClick={() => setCounter(counter += 1)}>
+                                                            <i className="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </label>
                                             </div>
-                                        </label>    
-                                    </div>
+                                        )
+                                    }
                                     <button
                                         onClick={() => {
                                             if (!cart.some(cartItem => cartItem.id === item.id)) {
@@ -199,13 +203,9 @@ const Detail = () => {
                                                 setMessage(true);
                                                 setMessageType('success');
                                                 setMessageText("Mahsulot savatga qo'shildi");
-                                            } else {
-                                                setMessageText("Mahsulot savatga qo'shilgan");
-                                                setMessage(true);
-                                                setMessageType('warning');
                                             }
                                         }}
-                                        className={styles.right__btn}
+                                        className={`${styles.right__btn} ${cart.some(cartItem => cartItem.id === item.id) ? styles.btnActive : ''}`}
                                     >
                                         SAVATCHAGA QO'SHISH
                                     </button>
@@ -275,7 +275,7 @@ const Detail = () => {
                     </Swiper>
                 </div>
             </MyContainer>
-        </section>
+        </section >
     )
 }
 

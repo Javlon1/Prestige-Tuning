@@ -4,10 +4,14 @@ import Image from 'next/image'
 import styles from './Cart.module.scss'
 import { Context } from '@/app/components/ui/Context/Context';
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
+import { useRouter } from 'next/router';
+import Message from '@/app/components/ui/Message/Message';
 
 
 const Cart = () => {
-    const { cart, setCart } = React.useContext(Context);
+    const router = useRouter();
+    const { cart, setCart, message, setMessage, messageType, setMessageType,
+        messageText, setMessageText } = React.useContext(Context);
     const hanndlerDelCart = () => {
         setCart([])
     }
@@ -27,10 +31,11 @@ const Cart = () => {
     };
 
     const totalSum = calculateTotalSum();
-    console.log(cart);
+
     return (
         <section className={styles.cart}>
             <MyContainer>
+                <Message messages={messageText} type={messageType} />
                 <div className={styles.cart__item}>
                     <div className={styles.cart__item__left}>
                         <div className={styles.cart__item__left__content}>
@@ -65,6 +70,7 @@ const Cart = () => {
                                                     </div>
                                                     <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                     <button
+
                                                         className={styles.btn}
                                                         onClick={() => {
                                                             setCart(cart.filter(cartItem => cartItem.id !== item.id));
@@ -85,7 +91,20 @@ const Cart = () => {
                             <h3>Buyurtmangiz</h3>
                             <span>Tovarlar soni <b>{cart.length}</b></span>
                             <span>Jami narxi <b>{totalSum.toLocaleString('en-US').replace(/,/g, ' ')}</b></span>
-                            <Link href={'/register'} className={styles.btn}>Buyurtma berish</Link>
+                            <button
+                                onClick={() => {
+                                    if (cart.length > 0) {
+                                        router.push('/register')
+                                    } else {
+                                        setMessageText("Savatchangiz bo'sh");
+                                        setMessage(true);
+                                        setMessageType('warning');
+                                    }
+                                }}
+                                className={styles.btn}
+                            >
+                                Buyurtma berish
+                            </button>
                         </div>
                     </div>
                 </div>

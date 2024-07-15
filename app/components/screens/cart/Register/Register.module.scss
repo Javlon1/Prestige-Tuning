@@ -486,11 +486,11 @@
         &__item {
             &__left {
                 &__header {
+                    width: 100%;
                     border-radius: 5px;
                     padding: .5rem;
 
                     .switchSlider {
-                        width: 100%;
                         border-radius: 5px;
 
                         span {

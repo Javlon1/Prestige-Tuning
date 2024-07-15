@@ -30,11 +30,36 @@ const Register = () => {
         house: false,
         additionalInfo: false
     });
+    const [isPhoneValid, setIsPhoneValid] = React.useState(true);
+
+    const formatPhoneNumber = (number) => {
+        let newValue = number.replace(/\D/g, '');
+
+        if (!newValue.startsWith('998')) {
+            newValue = '998' + newValue;
+        }
+
+        if (newValue.length > 12) {
+            newValue = newValue.slice(0, 12);
+        }
+
+        if (newValue.length > 3) newValue = newValue.replace(/^(\d{3})(\d+)/, '$1 $2');
+        if (newValue.length > 6) newValue = newValue.replace(/^(\d{3}) (\d{2})(\d+)/, '$1 $2 $3');
+        if (newValue.length > 9) newValue = newValue.replace(/^(\d{3}) (\d{2}) (\d{3})(\d+)/, '$1 $2 $3 $4');
+        if (newValue.length > 11) newValue = newValue.replace(/^(\d{3}) (\d{2}) (\d{3}) (\d{2})(\d+)/, '$1 $2 $3 $4 $5');
+
+        return newValue.trim();
+    };
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
+        const formattedPhone = formatPhoneNumber(value);
+        const phonePattern = /^998 \d{2} \d{3} \d{2} \d{2}$/;
+        setIsPhoneValid(phonePattern.test(formattedPhone));
+        setFormData({ ...formData, [id]: formattedPhone });
     };
+
+    // console.log(formData.phone.replace(/\s/g, ''));
 
     const handleFocus = (e) => {
         const { id } = e.target;
@@ -111,13 +136,14 @@ const Register = () => {
                                                 </div>
                                                 <div className={styles.inputContainer}>
                                                     <input
-                                                        type="number"
+                                                        type="text"
                                                         id="phone"
                                                         value={formData.phone}
                                                         onChange={handleChange}
                                                         onFocus={handleFocus}
                                                         onBlur={handleBlur}
                                                         required
+                                                        maxLength={17}
                                                     />
                                                     <label
                                                         htmlFor="phone"
@@ -149,7 +175,6 @@ const Register = () => {
                                                     onChange={handleChange}
                                                     onFocus={handleFocus}
                                                     onBlur={handleBlur}
-                                                    required
                                                 />
                                                 <label
                                                     htmlFor="city"
@@ -166,7 +191,6 @@ const Register = () => {
                                                     onChange={handleChange}
                                                     onFocus={handleFocus}
                                                     onBlur={handleBlur}
-                                                    required
                                                 />
                                                 <label
                                                     htmlFor="district"
@@ -184,7 +208,6 @@ const Register = () => {
                                                         onChange={handleChange}
                                                         onFocus={handleFocus}
                                                         onBlur={handleBlur}
-                                                        required
                                                     />
                                                     <label
                                                         htmlFor="street"
@@ -201,7 +224,6 @@ const Register = () => {
                                                         onChange={handleChange}
                                                         onFocus={handleFocus}
                                                         onBlur={handleBlur}
-                                                        required
                                                     />
                                                     <label
                                                         style={{ marginTop: '-1.2rem' }}
@@ -220,7 +242,6 @@ const Register = () => {
                                                     onChange={handleChange}
                                                     onFocus={handleFocus}
                                                     onBlur={handleBlur}
-                                                    required
                                                 />
                                                 <label
                                                     htmlFor="additionalInfo"

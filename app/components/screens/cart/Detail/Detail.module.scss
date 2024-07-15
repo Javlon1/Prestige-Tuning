@@ -301,6 +301,16 @@
     border: 2px solid $black !important;
 }
 
+.btnActive {
+    opacity: .5;
+    cursor: not-allowed !important;
+
+    &:hover {
+        color: #fff !important;
+        background-color: $red !important;
+    }
+}
+
 @media only screen and (max-width: 991px) {
     .detail {
         &__items {

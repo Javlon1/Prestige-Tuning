@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Head from 'next/head'
 import Catalog from '@/app/components/screens/catalog/Catalog';
+import AllIntro from '@/app/components/ui/AllIntro/AllIntro';
 
 const CatalogPage = () => {
 
@@ -25,6 +26,7 @@ const CatalogPage = () => {
             </Head>
 
             <main>
+                <AllIntro text="katalog" />
                 <Catalog />
             </main>
         </>
