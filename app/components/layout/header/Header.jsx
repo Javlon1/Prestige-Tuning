@@ -99,7 +99,7 @@ const Header = () => {
                                 onClick={() => router.push('/cart')}
                             >
                                 <i className="fa-solid fa-cart-shopping"></i>
-
+                                <strong>Savatcha</strong>
                                 {
                                     (cart.length > 0) && (
                                         <span>{cart.length}</span>
@@ -197,6 +197,7 @@ const Header = () => {
                                         placeholder='Tovar nomini kiriting'
                                     />
                                     <button className={styles.btn} type='submit'>
+                                        <strong>qidirish</strong>
                                         <i className="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </form>
