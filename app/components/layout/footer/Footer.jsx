@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from './Footer.module.scss'
 import { Context } from '@/app/components/ui/Context/Context';
-import logo from '../../../../public/img/logo.png'
+import logo from '../../../../public/img/logo-footer.png'
 
 const Footer = () => {
     const { lan } = React.useContext(Context);
@@ -36,6 +36,8 @@ const Footer = () => {
             <div className={styles.footer__content}>
                 <Link href={'/'}>
                     <Image
+                        width={150}
+                        height={50}
                         src={logo}
                         alt='footer'
                     />
