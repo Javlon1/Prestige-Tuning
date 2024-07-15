@@ -12,6 +12,7 @@ import MyContainer from '../../ui/MyContainer/MyContainer';
 const Header = () => {
     const { cart, setCart } = React.useContext(Context);
     const { pathname } = useRouter();
+    const router = useRouter();
     const [headerData] = React.useState([
         {
             id: 1,
@@ -92,7 +93,9 @@ const Header = () => {
                             </a>
                         </div>
                         <div className={styles.header__items__top__cart}>
-                            <Link href={'/cart'}>
+                            <button
+                                onClick={() => router.push('/cart')}
+                            >
                                 <i className="fa-solid fa-cart-shopping"></i>
 
                                 {
@@ -100,7 +103,7 @@ const Header = () => {
                                         <span>{cart.length}</span>
                                     )
                                 }
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </MyContainer>
@@ -123,7 +126,10 @@ const Header = () => {
                             </button>
                             <ul className={`${styles.catalog} ${catalog ? styles.catalogAct : ""}`}>
                                 <li className={styles.catalog__item}>
-                                    <Link onClick={() => setCatalog(false)} href={'/catalog'}>
+                                    <button onClick={() => {
+                                        setCatalog(false)
+                                        router.push('/catalog')
+                                    }} >
                                         <Image
                                             src={orginal}
                                             width={20}
@@ -133,7 +139,7 @@ const Header = () => {
                                         <p>
                                             Оригинальные запчасти
                                         </p>
-                                    </Link>
+                                    </button>
                                 </li>
                             </ul>
                             <ul className={`${styles.list} ${ham ? styles.navActive : ""}`}>
@@ -164,7 +170,9 @@ const Header = () => {
                                     ))
                                 }
                             </ul>
-                            <Link className={styles.cart} href={'/cart'}>
+                            <button className={styles.cart}
+                                onClick={() => router.push('/cart')}
+                            >
                                 <i className="fa-solid fa-cart-shopping"></i>
                                 Savatcha
                                 {
@@ -172,7 +180,7 @@ const Header = () => {
                                         <span>{cart.length}</span>
                                     )
                                 }
-                            </Link>
+                            </button>
 
                             <div className={styles.search}>
                                 <form className={styles.form}>

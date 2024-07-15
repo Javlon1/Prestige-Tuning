@@ -26,6 +26,8 @@ const Index = () => {
                 <meta property="og:site_name" content="Prestige Tuning" />
                 <meta property="og:locale" content="ru_RU" />
 
+                <link rel="canonical" href="https://prestigetuning.uz/" />
+
                 <title>Prestige Tuning</title>
             </Head>
 

@@ -168,9 +168,11 @@
                     transform: translateY(-200%);
 
                     &__item {
-                        a {
+                        button {
                             display: flex;
                             gap: 1rem;
+                            border: 0;
+                            cursor: pointer;
                             padding: 9px 10px;
                             border-radius: 5px;
                             background-color: $white;
@@ -215,6 +217,7 @@
                 }
 
                 .cart {
+                    cursor: pointer;
                     display: flex;
                     align-items: center;
                     gap: 15px;
@@ -278,7 +281,7 @@
                         transform: translateY(-200%);
 
                         &__item {
-                            a {
+                            button {
                                 display: flex;
                                 gap: 1rem;
                                 padding: 9px 10px;
@@ -387,7 +390,9 @@
                     display: block;
                     margin-right: .5rem;
 
-                    a {
+                    button {
+                        background-color: transparent;
+                        border: 0;
                         color: $red;
                         position: relative;
 

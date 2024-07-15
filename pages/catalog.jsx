@@ -21,6 +21,8 @@ const CatalogPage = () => {
                 <meta property="og:site_name" content="Prestige Tuning" />
                 <meta property="og:locale" content="ru_RU" />
 
+                <link rel="canonical" href="https://prestigetuning.uz/catalog" />
+
                 <title>Katalog</title>
             </Head>
 
