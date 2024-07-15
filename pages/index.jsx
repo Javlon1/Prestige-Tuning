@@ -13,7 +13,7 @@ const Index = () => {
         <>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/favicon.png" />
                 <meta name="description" content="Prestige Tuning - Andijondagi sifatli va tezkor avtomobil tuning markazi. Bizning kompaniya avtomobillar tuningi va ta'miri sohasida 10 yillik tajribaga ega va har yil 10,000 dan ortiq mijozga xizmat ko'rsatadi. Bizning mutaxassislar sizning avtomobilingizni sifatli va tez ravishda tuning qilishdi." />
                 <meta name="keywords" content="tuning, avtomobil tuning, Andijon, sifatli xizmat, tezkor xizmat, avtomobil sozlash, unumdorlikni oshirish, transport vositasini o'zgartirish, dvigatel tuning, tashqi ko'rinishni sozlash, ichki ko'rinishni sozlash, professional tuning, avtomobil yangilanishi, Andijon avtomobil xizmatlari, avtomobil ta'miri, ekspert tuning, maxsus avtomobil ishlari, avtomobil unumdorligi, yuqori sifatli tuning, tezkor xizmat, tajribali mutaxassislar" />
                 <meta name="image_src" content={logo} />

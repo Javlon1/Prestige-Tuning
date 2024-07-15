@@ -77,6 +77,7 @@ const Header = () => {
                                         placeholder='Tovar nomini kiriting'
                                     />
                                     <button className={styles.btn} type='submit'>
+                                        <strong>qidirish</strong>
                                         <i className="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </form>

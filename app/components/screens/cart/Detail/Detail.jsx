@@ -265,6 +265,7 @@ const Detail = () => {
                                                 <button type='button' onClick={() =>
                                                     router.push("/catalog-detail")
                                                 }>
+                                                    <strong>Savatga qo'shish</strong>
                                                     <i className="fa-solid fa-cart-shopping"></i>
                                                 </button>
                                             </div>
