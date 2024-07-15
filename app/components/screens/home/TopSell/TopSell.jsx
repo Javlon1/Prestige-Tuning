@@ -109,7 +109,7 @@ const TopSell = () => {
                                                     priority
                                                 />
 
-                                                <b className={styles.title}>{item.title}</b>
+                                                <b className={styles.title}>{item.title}</b> 
                                                 <div className={styles.item}>
                                                     <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                     <span onClick={() => {
