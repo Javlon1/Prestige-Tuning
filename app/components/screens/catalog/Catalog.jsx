@@ -252,8 +252,8 @@ const Catalog = () => {
                                 ))}
                             </ul>
 
-                            <button>Filterlash</button>
-                            <button>Filterni bekor qilish</button>
+                            <button type='button'>Filterlash</button>
+                            <button type='button'>Filterni bekor qilish</button>
                         </div>
                         <div className={styles.catalog__item__content}>
                             <div className={styles.catalog__item__content__list}>
@@ -273,7 +273,7 @@ const Catalog = () => {
                                                 <b>{item.title}</b>
                                                 <div className={styles.price}>
                                                     <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
-                                                    <button onClick={() =>
+                                                    <button type='button' onClick={() =>
                                                         router.push("/catalog-detail")
                                                     }>
                                                         <i className="fa-solid fa-cart-shopping"></i>
@@ -286,7 +286,7 @@ const Catalog = () => {
                             </div>
 
                             <div className={styles.catalog__item__content__pagination}>
-                                <button
+                                <button type='button'
                                     className={styles.catalog__item__content__pagination__btn}
                                     onClick={handlePrevPage}
                                     disabled={currentPage === 1}
@@ -296,7 +296,7 @@ const Catalog = () => {
 
                                 {Array.from({ length: itemsPerPage }, (_, index) => index + 1).map(
                                     (page) => (
-                                        <button
+                                        <button type='button'
                                             className={`${styles.catalog__item__content__pagination__items} ${currentPage === page ? styles.act : ""
                                                 }`}
                                             key={page}
@@ -307,7 +307,7 @@ const Catalog = () => {
                                     )
                                 )}
 
-                                <button
+                                <button type='button'
                                     className={styles.catalog__item__content__pagination__btn}
                                     onClick={handleNextPage}
                                     disabled={currentPage === itemsPerPage}

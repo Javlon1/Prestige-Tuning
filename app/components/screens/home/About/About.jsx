@@ -28,7 +28,7 @@ const About = () => {
                                 <p><span>Malakali</span> usta va ishchilar ishlaydi</p>
                             </div>
                         </div>
-                        <button>Bog’lanish</button>
+                        <button type='button'>Bog’lanish</button>
                     </div>
                     <div className={styles.about__item__right}>
                         <Image

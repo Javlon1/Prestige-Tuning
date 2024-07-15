@@ -94,6 +94,7 @@ const Header = () => {
                         </div>
                         <div className={styles.header__items__top__cart}>
                             <button
+                                type='button'
                                 onClick={() => router.push('/cart')}
                             >
                                 <i className="fa-solid fa-cart-shopping"></i>
@@ -110,10 +111,12 @@ const Header = () => {
                 <div className={styles.header__items__bottom}>
                     <MyContainer>
                         <div className={styles.header__items__bottom__items}>
-                            <button onClick={() => {
-                                setCatalog(!catalog)
-                                setham(false)
-                            }} className={`${styles.katalog} ${catalog ? styles.katalogAct : ""}`}>
+                            <button
+                                type='button'
+                                onClick={() => {
+                                    setCatalog(!catalog)
+                                    setham(false)
+                                }} className={`${styles.katalog} ${catalog ? styles.katalogAct : ""}`}>
                                 <Image
                                     src={dots}
                                     width={20}
@@ -126,10 +129,12 @@ const Header = () => {
                             </button>
                             <ul className={`${styles.catalog} ${catalog ? styles.catalogAct : ""}`}>
                                 <li className={styles.catalog__item}>
-                                    <button onClick={() => {
-                                        setCatalog(false)
-                                        router.push('/catalog')
-                                    }} >
+                                    <button
+                                        type='button'
+                                        onClick={() => {
+                                            setCatalog(false)
+                                            router.push('/catalog')
+                                        }} >
                                         <Image
                                             src={orginal}
                                             width={20}
@@ -170,7 +175,9 @@ const Header = () => {
                                     ))
                                 }
                             </ul>
-                            <button className={styles.cart}
+                            <button
+                                type='button'
+                                className={styles.cart}
                                 onClick={() => router.push('/cart')}
                             >
                                 <i className="fa-solid fa-cart-shopping"></i>

@@ -63,7 +63,7 @@ const TopSell = () => {
                             <i className="fa-solid fa-arrow-right-long"></i>
                         </Link>
                     </div>
-                    <ul className={styles.topSell__item__bottom}>
+                    <div className={styles.topSell__item__bottom}>
                         <Swiper
                             modules={[Navigation, Scrollbar, A11y]}
                             spaceBetween={10}
@@ -124,9 +124,9 @@ const TopSell = () => {
                                 ))
                             }
                         </Swiper>
-                    </ul>
+                    </div>
                 </div>
-                <ul className={styles.topSell__sale}>
+                <div className={styles.topSell__sale}>
                     <Swiper
                         modules={[Navigation, Scrollbar, A11y]}
                         spaceBetween={10}
@@ -153,7 +153,7 @@ const TopSell = () => {
                                     <div className={styles.topSell__sale__item}>
                                         <div className={styles.title}>
                                             <b>Gentra OPTRA faralar sotuvda !</b>
-                                            <button>
+                                            <button type='button'>
                                                 Tanlash
                                                 <i className="fa-solid fa-arrow-right-long"></i>
                                             </button>
@@ -168,7 +168,7 @@ const TopSell = () => {
                             ))
                         }
                     </Swiper>
-                </ul>
+                </div>
             </MyContainer>
         </section>
     )

@@ -48,6 +48,7 @@ const Footer = () => {
                             <li key={item.id}>
                                 <a href={item.link} target="_blank" rel="noopener noreferrer">
                                     <i className={item.icon}></i>
+                                    <p>Link</p>
                                 </a>
                             </li>
                         ))

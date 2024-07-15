@@ -184,11 +184,11 @@ const Detail = () => {
                                                 <label>
                                                     <p>Miqdori</p>
                                                     <div className={styles.right__items__counter}>
-                                                        <button onClick={() => { if (counter > 1) setCounter(counter -= 1) }}>
+                                                        <button type='button' onClick={() => { if (counter > 1) setCounter(counter -= 1) }}>
                                                             <i className="fa-solid fa-minus"></i>
                                                         </button>
                                                         <p>{counter}</p>
-                                                        <button onClick={() => setCounter(counter += 1)}>
+                                                        <button type='button' onClick={() => setCounter(counter += 1)}>
                                                             <i className="fa-solid fa-plus"></i>
                                                         </button>
                                                     </div>
@@ -197,6 +197,7 @@ const Detail = () => {
                                         )
                                     }
                                     <button
+                                        type='button'
                                         onClick={() => {
                                             if (!cart.some(cartItem => cartItem.id === item.id)) {
                                                 setCart([...cart, { ...item, quantity: counter }]);
@@ -261,7 +262,7 @@ const Detail = () => {
                                             <b>{item.title}</b>
                                             <div className={styles.price}>
                                                 <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
-                                                <button onClick={() =>
+                                                <button type='button' onClick={() =>
                                                     router.push("/catalog-detail")
                                                 }>
                                                     <i className="fa-solid fa-cart-shopping"></i>

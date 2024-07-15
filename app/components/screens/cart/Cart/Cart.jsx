@@ -41,7 +41,7 @@ const Cart = () => {
                         <div className={styles.cart__item__left__content}>
                             <div className={styles.cart__item__left__content__header}>
                                 <p>Savatchaga olingan tovarlar</p>
-                                <button onClick={() => hanndlerDelCart()}>Savatchani tozalash <i className="fa-solid fa-trash-can"></i></button>
+                                <button type='button' onClick={() => hanndlerDelCart()}>Savatchani tozalash <i className="fa-solid fa-trash-can"></i></button>
                             </div>
                             <ul className={styles.cart__item__left__content__list}>
                                 {
@@ -60,17 +60,17 @@ const Cart = () => {
                                                 <div className={styles.ost}>
                                                     <b className={styles.day}>5 kun</b>
                                                     <div className={styles.count}>
-                                                        <button onClick={() => handleQuantityChange(item.id, -1)}>
+                                                        <button type='button' onClick={() => handleQuantityChange(item.id, -1)}>
                                                             <i className="fa-solid fa-minus"></i>
                                                         </button>
                                                         <span>{item.quantity}</span>
-                                                        <button onClick={() => handleQuantityChange(item.id, 1)}>
+                                                        <button type='button' onClick={() => handleQuantityChange(item.id, 1)}>
                                                             <i className="fa-solid fa-plus"></i>
                                                         </button>
                                                     </div>
                                                     <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
                                                     <button
-
+                                                        type='button'
                                                         className={styles.btn}
                                                         onClick={() => {
                                                             setCart(cart.filter(cartItem => cartItem.id !== item.id));
@@ -92,6 +92,7 @@ const Cart = () => {
                             <span>Tovarlar soni <b>{cart.length}</b></span>
                             <span>Jami narxi <b>{totalSum.toLocaleString('en-US').replace(/,/g, ' ')}</b></span>
                             <button
+                                type='button'
                                 onClick={() => {
                                     if (cart.length > 0) {
                                         router.push('/register')
