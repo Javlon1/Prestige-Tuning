@@ -53,12 +53,16 @@ const Register = () => {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        const formattedPhone = formatPhoneNumber(value);
-        const phonePattern = /^998 \d{2} \d{3} \d{2} \d{2}$/;
-        setIsPhoneValid(phonePattern.test(formattedPhone));
-        setFormData({ ...formData, [id]: formattedPhone });
-    };
 
+        if (id === 'phone') {
+            const formattedPhone = formatPhoneNumber(value);
+            const phonePattern = /^998 \d{2} \d{3} \d{2} \d{2}$/;
+            setIsPhoneValid(phonePattern.test(formattedPhone));
+            setFormData({ ...formData, [id]: formattedPhone });
+        } else {
+            setFormData({ ...formData, [id]: value });
+        }
+    };
     // console.log(formData.phone.replace(/\s/g, ''));
 
     const handleFocus = (e) => {
