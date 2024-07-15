@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Head from 'next/head';
 import Catalog from '@/app/components/screens/catalog/Catalog';
-import logo from '../public/img/logo.png';
+import logo from '../public/img/logo-footer.png';
 
 const CatalogPage = () => {
     return (
         <>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/favicon.png" />
                 <meta name="description" content="Bizning katalogimizda eng yaxshi avtomobil tuning mahsulotlari va xizmatlari." />
                 <meta name="keywords" content="katalog, avtomobil tuning, Andijon, sifatli xizmat, tezkor xizmat, tuning mahsulotlari, tuning xizmatlari" />
                 <meta name="image_src" content={logo.src} />
