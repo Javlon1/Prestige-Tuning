@@ -8,12 +8,45 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import slayd1 from '../../../../../public/img/slayd.png'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer';
 
 
 const Intro = () => {
-    const { close } = React.useContext(Context);
+    const { url, auth_token } = React.useContext(Context);
+    const [data, setData] = React.useState([])
+
+    React.useEffect(() => {
+
+        const fullUrl = `${url}/v1/homepage/banners/`;
+        const fetchData = async () => {
+            try {
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data) {
+                    setData(data);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <section className={styles.intro}>
@@ -37,40 +70,29 @@ const Intro = () => {
                         }}
                         loop={true}
                     >
-                        <SwiperSlide>
-                            <div className={styles.intro__item}>
-                                <div className={styles.intro__item__left}>
-                                    <b className={styles.intro__item__left__title}>
-                                        Original Genrta tuning uchun <span>15%</span>  gacha chegirma !
-                                    </b>
-                                    <p>Aksiya 1-iyulga qadar davom etadi.</p>
-                                </div>
-                                <div className={styles.intro__item__right}>
-                                    <Image
-                                        src={slayd1}
-                                        alt='slayd'
-                                        priority
-                                    />
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className={styles.intro__item}>
-                                <div className={styles.intro__item__left}>
-                                    <b className={styles.intro__item__left__title}>
-                                        Original Genrta tuning uchun <span>15%</span>  gacha chegirma !
-                                    </b>
-                                    <p>Aksiya 1-iyulga qadar davom etadi.</p>
-                                </div>
-                                <div className={styles.intro__item__right}>
-                                    <Image
-                                        src={slayd1}
-                                        alt='slayd'
-                                        priority
-                                    />
-                                </div>
-                            </div>
-                        </SwiperSlide>
+                        {
+                            data?.map((item, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className={styles.intro__item}>
+                                        <div className={styles.intro__item__left}>
+                                            <b className={styles.intro__item__left__title}>
+                                                {item.name} <span>{item.ceiling}%</span>  gacha chegirma !
+                                            </b>
+                                            <p>{item.description}</p>
+                                        </div>
+                                        <div className={styles.intro__item__right}>
+                                            <Image
+                                                width={500}
+                                                height={500}
+                                                src={item.image_url}
+                                                alt='slayd'
+                                                priority
+                                            />
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                            ))
+                        }
                     </Swiper>
                     <div className={styles['swiper-button-prev-custom']}>
                         <i className="fa-solid fa-angle-left"></i>

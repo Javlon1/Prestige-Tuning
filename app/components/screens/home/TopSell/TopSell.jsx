@@ -16,36 +16,43 @@ import { useRouter } from 'next/router';
 
 const TopSell = () => {
     const router = useRouter();
-    const { cart, setCart, setMessage, messageType, setMessageType, messageText, setMessageText } = React.useContext(Context);
+    const { url, auth_token, messageType, messageText } = React.useContext(Context);
+    const [data, setData] = React.useState([])
 
-    const [data] = React.useState(
-        [
-            {
-                id: 1,
-                title: "Malibu rul SUPER 3000 X1 5W-40",
-                price: "1850000",
-                image: slayd1
-            },
-            {
-                id: 2,
-                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "2300000",
-                image: slayd1
-            },
-            {
-                id: 3,
-                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "3500000",
-                image: slayd1
-            },
-            {
-                id: 4,
-                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "1700000",
-                image: slayd1
+    React.useEffect(() => {
+
+        const fullUrl = `${url}/v1/homepage/topsellingproducts/`;
+        const fetchData = async () => {
+            try {
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data) {
+                    setData(data);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
             }
-        ]
-    )
+        };
+
+        fetchData();
+    }, []);
+
+    console.log(data);
 
     return (
         <section className={styles.topSell}>
@@ -67,7 +74,7 @@ const TopSell = () => {
                         <Swiper
                             modules={[Navigation, Scrollbar, A11y]}
                             spaceBetween={10}
-                            slidesPerView={4}
+                            slidesPerView={data.top_selling_products?.length === 3 ? 4 : data.top_selling_products?.length + 1}
                             navigation={{
                                 prevEl: `.${styles.btn__next}`,
                                 nextEl: `.${styles.btn__prev}`,
@@ -80,37 +87,50 @@ const TopSell = () => {
                                     slidesPerView: 2,
                                 },
                                 1024: {
-                                    slidesPerView: 4,
+                                    slidesPerView: (data.top_selling_products?.length === 3 ? 4 : data.top_selling_products?.length + 1),
                                 },
                             }}
                         >
-                            <SwiperSlide>
-                                <div className={styles.topSell__item__bottom__obj}>
-                                    <div onClick={() => router.push('/catalog-detail')} className={styles.topSell__item__bottom__obj__item}>
-                                        <b className={styles.title}>Gentra OPTRA faralar sotuvda !</b>
-                                        <Image
-                                            src={slayd1}
-                                            alt='slayd'
-                                            priority
-                                        />
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
                             {
-                                data?.map((item) => (
-                                    <SwiperSlide key={item.id}>
-                                        <div className={styles.topSell__item__bottom__cart}>
-                                            <div className={styles.topSell__item__bottom__cart__item}>
+                                data.most_sold_product?.map((item, index) => (
+                                    <SwiperSlide key={index}>
+                                        <div className={styles.topSell__item__bottom__obj}>
+                                            <div onClick={() => router.push('/catalog-detail')} className={styles.topSell__item__bottom__obj__item}>
+                                                <b className={styles.title}>{item.name}</b>
                                                 <Image
-                                                    src={item.image}
+                                                    src={item.image_1}
                                                     alt='slayd'
                                                     priority
                                                 />
-                                                <b onClick={() => router.push('/catalog-detail')} className={styles.title}>{item.title}</b>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                ))
+                            }
+                            {
+                                data.top_selling_products?.map((item, index) => (
+                                    <SwiperSlide key={index}>
+                                        <div className={styles.topSell__item__bottom__cart}>
+                                            <div className={styles.topSell__item__bottom__cart__item}>
+                                                <Image
+                                                    width={300}
+                                                    height={300}
+                                                    src={item.image_1}
+                                                    alt='slayd'
+                                                    priority
+                                                />
+                                                <b onClick={() => router.push('/catalog-detail')} className={styles.title}>{item.name}</b>
                                                 <div className={styles.item}>
-                                                    <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
+                                                    <div className={styles.sell_count}>
+                                                        {
+                                                            (item.ceiling_price > 0) && (
+                                                                <p>{parseInt(item.ceiling_price).toLocaleString('en-US').replace(/,/g, ' ')} so'm</p>
+                                                            )
+                                                        }
+                                                        <b className={`${item.ceiling_price > 0 ? styles.sell_count__active : ''}`}>{parseInt(item.uzs_price).toLocaleString('en-US').replace(/,/g, ' ')} so'm</b>
+                                                    </div>
                                                     <span onClick={() => {
                                                         router.push('/catalog-detail');
                                                     }}>
@@ -147,24 +167,24 @@ const TopSell = () => {
                         }}
                     >
                         {
-                            data?.map((item) => (
-                                <SwiperSlide key={item.id}>
-                                    <div className={styles.topSell__sale__item}>
-                                        <div className={styles.title}>
-                                            <b>Gentra OPTRA faralar sotuvda !</b>
-                                            <button type='button'>
-                                                Tanlash
-                                                <i className="fa-solid fa-arrow-right-long"></i>
-                                            </button>
-                                        </div>
-                                        <Image
-                                            src={slayd1}
-                                            alt='slayd'
-                                            priority
-                                        />
-                                    </div>
-                                </SwiperSlide>
-                            ))
+                            // data?.map((item) => (
+                            //     <SwiperSlide key={item.id}>
+                            //         <div className={styles.topSell__sale__item}>
+                            //             <div className={styles.title}>
+                            //                 <b>Gentra OPTRA faralar sotuvda !</b>
+                            //                 <button type='button'>
+                            //                     Tanlash
+                            //                     <i className="fa-solid fa-arrow-right-long"></i>
+                            //                 </button>
+                            //             </div>
+                            //             <Image
+                            //                 src={slayd1}
+                            //                 alt='slayd'
+                            //                 priority
+                            //             />
+                            //         </div>
+                            //     </SwiperSlide>
+                            // ))
                         }
                     </Swiper>
                 </div>

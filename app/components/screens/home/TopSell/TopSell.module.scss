@@ -134,10 +134,22 @@
                         display: flex;
                         justify-content: space-between;
 
-                        p {
-                            font-size: 1.1rem;
-                            font-weight: 500;
-                            color: $gray;
+                        .sell_count {
+                            display: flex;
+                            align-items: start;
+                            gap: 10px;
+
+                            b {
+                                font-size: 1.1rem;
+                                font-weight: 500;
+                                color: $black;
+                            }
+
+                            p {
+                                font-size: 1.1rem;
+                                font-weight: 500;
+                                color: $black;
+                            }
                         }
 
                         span {
@@ -349,4 +361,10 @@
             }
         }
     }
+}
+
+.sell_count__active {
+    font-size: .8rem !important;
+    color: $gray !important;
+    text-decoration: line-through !important;
 }

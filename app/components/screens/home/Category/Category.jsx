@@ -4,40 +4,67 @@ import Image from 'next/image'
 import styles from './Category.module.scss'
 import { Context } from '@/app/components/ui/Context/Context';
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
-import orginal from '../../../../../public/img/orginal.png'
 import category from '../../../../../public/img/category.png'
 
 const Category = () => {
-    const { lan } = React.useContext(Context);
+    const { url, auth_token } = React.useContext(Context);
+    const [data, setData] = React.useState([])
+
+    React.useEffect(() => {
+
+        const fullUrl = `${url}/v1/homepage/category/`;
+        const fetchData = async () => {
+            try {
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data) {
+                    setData(data);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
+            }
+        };
+
+        fetchData();
+    }, []); // topsellingproducts
 
     return (
         <section className={styles.category}>
             <MyContainer>
                 <ul className={styles.category__list}>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/catalog'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
-                    <li className={styles.category__list__item}>
-                        <Link href={'/catalog'}>
-                            <Image
-                                src={orginal}
-                                alt='category'
-                            />
-                            <div>
-                                <b>Rullar</b>
-                                <p>730 mahsulot</p>
-                            </div>
-                        </Link>
-                    </li>
+                    {
+                        data?.map((item, index) => (
+                            <li key={index} className={styles.category__list__item}>
+                                <Link href={'/catalog'}>
+                                    <Image
+                                        width={40}
+                                        height={40}
+                                        src={item.category_image}
+                                        alt='category'
+                                    />
+                                    <div>
+                                        <b>{item.name}</b>
+                                        <p>{item.products_count} mahsulot</p>
+                                    </div>
+                                </Link>
+                            </li>
+                        ))
+                    }
                     <li className={styles.category__list__item}>
                         <Link href={'/catalog'}>
                             <div className={styles.img}>

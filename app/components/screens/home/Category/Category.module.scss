@@ -21,6 +21,12 @@
                 border: 1px solid $border-color;
                 background-color: $white;
                 color: $black;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
             }
 
             &:hover {
@@ -46,6 +52,11 @@
                         display: flex;
                         align-items: center;
                         gap: 20px;
+
+                        img {
+                            border-radius: 0%;
+                            object-fit: contain;
+                        }
                     }
 
                     i {
