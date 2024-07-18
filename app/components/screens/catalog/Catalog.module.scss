@@ -264,6 +264,7 @@
 
 .dN {
     opacity: .5;
+    cursor: not-allowed !important;
 
     &:hover {
         background-color: $black !important;
