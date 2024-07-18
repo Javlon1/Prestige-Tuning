@@ -68,6 +68,8 @@ const Header = () => {
                                 <Image
                                     src={logo}
                                     alt='logo'
+                                    width={150}
+                                    height={50}
                                 />
                             </Link>
                             <div className={styles.header__items__top__form__search}>
