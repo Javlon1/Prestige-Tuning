@@ -86,6 +86,19 @@ const Detail = () => {
         setSelectedImage(swiper.activeIndex);
     };
 
+
+
+    const handleAddToCart = (item, counter) => {
+        const existingItem = cart.find(cartItem => cartItem.id === item.id);
+        if (!existingItem) {
+            const newItem = { ...item, quantity: counter, addedAt: new Date().toISOString() };
+            setCart([...cart, newItem]);
+            setMessage(true);
+            setMessageType('success');
+            setMessageText("Mahsulot savatga qo'shildi");
+        }
+    };
+
     return (
         <section className={styles.detail}>
             <Message messages={messageText} type={messageType} />
@@ -198,14 +211,7 @@ const Detail = () => {
                                     }
                                     <button
                                         type='button'
-                                        onClick={() => {
-                                            if (!cart.some(cartItem => cartItem.id === item.id)) {
-                                                setCart([...cart, { ...item, quantity: counter }]);
-                                                setMessage(true);
-                                                setMessageType('success');
-                                                setMessageText("Mahsulot savatga qo'shildi");
-                                            }
-                                        }}
+                                        onClick={() => {handleAddToCart(item, counter)}}
                                         className={`${styles.right__btn} ${cart.some(cartItem => cartItem.id === item.id) ? styles.btnActive : ''}`}
                                     >
                                         SAVATCHAGA QO'SHISH

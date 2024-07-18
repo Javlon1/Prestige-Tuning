@@ -253,7 +253,7 @@ const Catalog = () => {
                             </ul>
 
                             <button type='button'>Filterlash</button>
-                            <button type='button'>Filterni bekor qilish</button>
+                            <button className={!filter ? styles.dN : ''} type='button'>Filterni bekor qilish</button>
                         </div>
                         <div className={styles.catalog__item__content}>
                             <div className={styles.catalog__item__content__list}>

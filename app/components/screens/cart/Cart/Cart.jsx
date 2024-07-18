@@ -32,6 +32,26 @@ const Cart = () => {
 
     const totalSum = calculateTotalSum();
 
+    React.useEffect(() => {
+        const intervalId = setInterval(() => {
+            const currentTime = new Date().toISOString();
+            const updatedCart = cart.filter(item => {
+                const itemTime = new Date(item.addedAt);
+                const timeDiff = (new Date(currentTime) - itemTime) / (1000 * 60 * 60 * 24);
+                return timeDiff < 3;
+            });
+            setCart(updatedCart);
+        }, 1000 * 60 * 60);
+
+        return () => clearInterval(intervalId);
+    }, [cart]);
+
+    const timeLeft = (addedAt) => {
+        const itemTime = new Date(addedAt);
+        const timeDiff = (new Date() - itemTime) / (1000 * 60 * 60 * 24);
+        return Math.max(0, 3 - timeDiff);
+    };
+
     return (
         <section className={styles.cart}>
             <MyContainer>
@@ -58,7 +78,7 @@ const Cart = () => {
                                                     <p>{item.title}</p>
                                                 </div>
                                                 <div className={styles.ost}>
-                                                    <b className={styles.day}>5 kun</b>
+                                                    <b className={styles.day}>{timeLeft(item.addedAt).toFixed()} kun</b>
                                                     <div className={styles.count}>
                                                         <button type='button' onClick={() => handleQuantityChange(item.id, -1)}>
                                                             <i className="fa-solid fa-minus"></i>
