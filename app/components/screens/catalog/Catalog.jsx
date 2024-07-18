@@ -154,6 +154,7 @@ const Catalog = () => {
             <AllIntro text="katalog" />
             <section className={styles.catalog}>
                 <MyContainer>
+                    <h1>catalog</h1>
                     <div className={styles.catalog__item}>
                         <div className={styles.catalog__item__res}>
                             <span onClick={() => setFlter(!filter)}>

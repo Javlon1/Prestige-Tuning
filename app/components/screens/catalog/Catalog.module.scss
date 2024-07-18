@@ -3,6 +3,11 @@
 .catalog {
     padding: 0 0 2rem;
 
+    h1 {
+        font-size: .1px;
+        color: $white;
+    }
+
     &__item {
         display: flex;
         align-items: start;
