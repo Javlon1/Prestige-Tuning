@@ -32,6 +32,10 @@
             &:hover {
                 transform: translate(-.4rem, .4rem);
                 box-shadow: $shadow;
+
+                b {
+                    color: $red;
+                }
             }
 
             &:last-child {

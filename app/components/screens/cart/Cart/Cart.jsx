@@ -1,29 +1,37 @@
 import * as React from 'react';
-import Link from 'next/link'
-import Image from 'next/image'
-import styles from './Cart.module.scss'
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './Cart.module.scss';
 import { Context } from '@/app/components/ui/Context/Context';
-import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
-import { useRouter } from 'next/router';
+import MyContainer from '@/app/components/ui/MyContainer/MyContainer';
 import Message from '@/app/components/ui/Message/Message';
-
+import { useRouter } from 'next/router';
 
 const Cart = () => {
     const router = useRouter();
-    const { cart, setCart, message, setMessage, messageType, setMessageType,
-        messageText, setMessageText } = React.useContext(Context);
-    const hanndlerDelCart = () => {
-        setCart([])
-    }
+    const { cart, setCart, setMessage, messageType, setMessageType, messageText, setMessageText } = React.useContext(Context);
+
+    // Обновлено название функции для очистки корзины
+    const handleClearCart = () => {
+        setCart([]);
+    };
 
     const calculateTotalSum = () => {
         return cart.reduce((sum, item) => {
-            const price = parseFloat(item.price);
-            return sum + (isNaN(price) ? 0 : price);
+            const price = parseFloat(item.usd_price);
+            const quantity = parseInt(item.quantity, 10);
+
+            // Проверка на валидность данных
+            if (isNaN(price) || isNaN(quantity)) {
+                console.warn(`Invalid data for item with id ${item.id}: price = ${item.price}, quantity = ${item.quantity}`);
+                return sum;
+            }
+
+            return sum + price * quantity;
         }, 0);
     };
 
-
+    // Обновление количества товара в корзине
     const handleQuantityChange = (id, delta) => {
         setCart(cart.map(item =>
             item.id === id ? { ...item, quantity: Math.max(item.quantity + delta, 1) } : item
@@ -61,7 +69,9 @@ const Cart = () => {
                         <div className={styles.cart__item__left__content}>
                             <div className={styles.cart__item__left__content__header}>
                                 <p>Savatchaga olingan tovarlar</p>
-                                <button type='button' onClick={() => hanndlerDelCart()}>Savatchani tozalash <i className="fa-solid fa-trash-can"></i></button>
+                                <button type='button' onClick={handleClearCart}>
+                                    Savatchani tozalash <i className="fa-solid fa-trash-can"></i>
+                                </button>
                             </div>
                             <ul className={styles.cart__item__left__content__list}>
                                 {
@@ -71,7 +81,7 @@ const Cart = () => {
                                                 <div className={styles.title}>
                                                     <Image
                                                         src={item.images[0]?.image}
-                                                        alt='slayd1'
+                                                        alt='product'
                                                         width={100}
                                                         height={90}
                                                     />
@@ -80,15 +90,18 @@ const Cart = () => {
                                                 <div className={styles.ost}>
                                                     <b className={styles.day}>{timeLeft(item.addedAt).toFixed()} kun</b>
                                                     <div className={styles.count}>
-                                                        <button type='button' onClick={() => handleQuantityChange(item.id, -1)}>
-                                                            <i className="fa-solid fa-minus"></i>
-                                                        </button>
-                                                        <span>{item.quantity}</span>
-                                                        <button type='button' onClick={() => handleQuantityChange(item.id, 1)}>
-                                                            <i className="fa-solid fa-plus"></i>
-                                                        </button>
+                                                        <div className={styles.count__btn}>
+                                                            <button type='button' onClick={() => handleQuantityChange(item.id, -1)}>
+                                                                <i className="fa-solid fa-minus"></i>
+                                                            </button>
+                                                            <span>{item.quantity}</span>
+                                                            <button type='button' onClick={() => handleQuantityChange(item.id, 1)}>
+                                                                <i className="fa-solid fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                        <p>1-ta = {parseFloat(item.usd_price).toLocaleString('en-US').replace(/,/g, ' ')} $</p>
                                                     </div>
-                                                    <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
+                                                    <p>{parseFloat(item.usd_price * item.quantity).toLocaleString('en-US').replace(/,/g, ' ')} $</p>
                                                     <button
                                                         type='button'
                                                         className={styles.btn}
@@ -110,12 +123,12 @@ const Cart = () => {
                         <div className={styles.cart__item__right__content}>
                             <h3>Buyurtmangiz</h3>
                             <span>Tovarlar soni <b>{cart.length}</b></span>
-                            <span>Jami narxi <b>{totalSum.toLocaleString('en-US').replace(/,/g, ' ')}</b></span>
+                            <span>Jami narxi <b>{totalSum.toLocaleString('en-US').replace(/,/g, ' ')} $</b></span>
                             <button
                                 type='button'
                                 onClick={() => {
                                     if (cart.length > 0) {
-                                        router.push('/register')
+                                        router.push('/register');
                                     } else {
                                         setMessageText("Savatchangiz bo'sh");
                                         setMessage(true);
@@ -130,8 +143,8 @@ const Cart = () => {
                     </div>
                 </div>
             </MyContainer>
-        </section >
-    )
-}
+        </section>
+    );
+};
 
 export default Cart;

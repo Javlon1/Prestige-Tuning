@@ -5,14 +5,16 @@ import { useRouter } from 'next/router';
 import styles from './Header.module.scss';
 import { Context } from '../../ui/Context/Context';
 import logo from "../../../../public/img/logo.png"
-import orginal from "../../../../public/img/orginal.png"
 import dots from "../../../../public/img/dots.png"
 import MyContainer from '../../ui/MyContainer/MyContainer';
 
 const Header = () => {
-    const { cart, setCart } = React.useContext(Context);
+    const { url, auth_token, cart } = React.useContext(Context);
     const { pathname } = useRouter();
     const router = useRouter();
+    const [formData, setFormData] = React.useState({
+        name: '',
+    });
     const [headerData] = React.useState([
         {
             id: 1,
@@ -38,8 +40,75 @@ const Header = () => {
 
     const [ham, setham] = React.useState(false);
     const [catalog, setCatalog] = React.useState(false);
+    const [data, setData] = React.useState([]);
 
 
+    React.useEffect(() => {
+        const fullUrl = `${url}/v1/homepage/category/`;
+        const fetchData = async () => {
+            try {
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data) {
+                    setData(data);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const fullUrl = `${url}/v1/products/search_products/?search=${formData.name}`;
+
+        try {
+            const response = await fetch(fullUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${auth_token}`,
+                },
+            });
+            const data = await response.json();
+            console.log(data.results[0]);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else {
+                setFormData({
+                    name: '',
+                })
+                router.push({
+                    pathname: '/catalog',
+                    query: {
+                        brand_id: data.results[0].brand,
+                        car_model_id: data.results[0].car_model,
+                        category_id: data.results[0].category,
+                    }
+                })
+            }
+        } catch (error) {
+            console.error('Error during POST request:', error);
+        }
+    };
 
     return (
         <header className={styles.header} >
@@ -73,10 +142,12 @@ const Header = () => {
                                 />
                             </Link>
                             <div className={styles.header__items__top__form__search}>
-                                <form className={styles.form}>
+                                <form onSubmit={handleSubmit} className={styles.form}>
                                     <input
                                         type="text"
-                                        placeholder='Tovar nomini kiriting'
+                                        placeholder="Tovar nomini kiriting"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     />
                                     <button className={styles.btn} type='submit'>
                                         <strong>qidirish</strong>
@@ -131,24 +202,33 @@ const Header = () => {
                                 </p>
                             </button>
                             <ul className={`${styles.catalog} ${catalog ? styles.catalogAct : ""}`}>
-                                <li className={styles.catalog__item}>
-                                    <button
-                                        type='button'
-                                        onClick={() => {
-                                            setCatalog(false)
-                                            router.push('/catalog')
-                                        }} >
-                                        <Image
-                                            src={orginal}
-                                            width={20}
-                                            height={20}
-                                            alt='dots'
-                                        />
-                                        <p>
-                                            Оригинальные запчасти
-                                        </p>
-                                    </button>
-                                </li>
+                                {
+                                    data?.map((item) => (
+                                        <li key={item.id} className={styles.catalog__item}>
+                                            <button
+                                                type='button'
+                                                onClick={() => {
+                                                    setCatalog(false)
+                                                    router.push({
+                                                        pathname: '/catalog',
+                                                        query: {
+                                                            category_id: item.id
+                                                        }
+                                                    })
+                                                }} >
+                                                <Image
+                                                    src={item.category_image}
+                                                    width={20}
+                                                    height={20}
+                                                    alt='dots'
+                                                />
+                                                <p>
+                                                    {item.name}
+                                                </p>
+                                            </button>
+                                        </li>
+                                    ))
+                                }
                             </ul>
                             <ul className={`${styles.list} ${ham ? styles.navActive : ""}`}>
                                 {

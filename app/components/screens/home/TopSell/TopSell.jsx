@@ -4,8 +4,7 @@ import Image from 'next/image'
 import styles from './TopSell.module.scss'
 import { Context } from '@/app/components/ui/Context/Context';
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
-import slayd1 from '../../../../../public/img/slayd.png'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -52,8 +51,6 @@ const TopSell = () => {
         fetchData();
     }, []);
 
-    console.log(data);
-
     return (
         <section className={styles.topSell}>
             <MyContainer>
@@ -91,24 +88,30 @@ const TopSell = () => {
                                 },
                             }}
                         >
-                            {
-                                data.most_sold_product?.map((item, index) => (
-                                    <SwiperSlide key={index}>
-                                        <div className={styles.topSell__item__bottom__obj}>
-                                            <div onClick={() => router.push('/catalog-detail')} className={styles.topSell__item__bottom__obj__item}>
-                                                <b className={styles.title}>{item.name}</b>
-                                                <Image
-                                                    src={item.image_1}
-                                                    alt='slayd'
-                                                    priority
-                                                />
-                                                <div></div>
-                                                <div></div>
-                                            </div>
-                                        </div>
-                                    </SwiperSlide>
-                                ))
-                            }
+
+                            <SwiperSlide>
+                                <div className={styles.topSell__item__bottom__obj}>
+                                    <div onClick={() =>
+                                        router.push({
+                                            pathname: '/catalog-detail',
+                                            query: {
+                                                product_id: item.id
+                                            }
+                                        })}
+                                        className={styles.topSell__item__bottom__obj__item}>
+                                        <b className={styles.title}>{data.most_sold_product?.name}</b>
+                                        <Image
+                                            width={300}
+                                            height={300}
+                                            src={data.most_sold_product?.image_1}
+                                            alt='slayd'
+                                            priority
+                                        />
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
                             {
                                 data.top_selling_products?.map((item, index) => (
                                     <SwiperSlide key={index}>
@@ -121,18 +124,31 @@ const TopSell = () => {
                                                     alt='slayd'
                                                     priority
                                                 />
-                                                <b onClick={() => router.push('/catalog-detail')} className={styles.title}>{item.name}</b>
+                                                <b onClick={() =>
+                                                    router.push({
+                                                        pathname: '/catalog-detail',
+                                                        query: {
+                                                            product_id: item.id
+                                                        }
+                                                    })}
+                                                    className={styles.title}>{item.name}</b>
                                                 <div className={styles.item}>
                                                     <div className={styles.sell_count}>
                                                         {
-                                                            (item.ceiling_price > 0) && (
-                                                                <p>{parseInt(item.ceiling_price).toLocaleString('en-US').replace(/,/g, ' ')} so'm</p>
+                                                            item.uzs_price.length <= 9 ? (
+                                                                <b>{parseInt(item.uzs_price).toLocaleString('en-US').replace(/,/g, ' ')} so'm</b>
+                                                            ) : (
+                                                                <b>{parseInt(item.usd_price).toLocaleString('en-US').replace(/,/g, ' ')} $</b>
                                                             )
                                                         }
-                                                        <b className={`${item.ceiling_price > 0 ? styles.sell_count__active : ''}`}>{parseInt(item.uzs_price).toLocaleString('en-US').replace(/,/g, ' ')} so'm</b>
                                                     </div>
                                                     <span onClick={() => {
-                                                        router.push('/catalog-detail');
+                                                        router.push({
+                                                            pathname: '/catalog-detail',
+                                                            query: {
+                                                                product_id: item.id
+                                                            }
+                                                        })
                                                     }}>
                                                         <i className="fa-solid fa-cart-shopping"></i>
                                                     </span>
@@ -167,24 +183,34 @@ const TopSell = () => {
                         }}
                     >
                         {
-                            // data?.map((item) => (
-                            //     <SwiperSlide key={item.id}>
-                            //         <div className={styles.topSell__sale__item}>
-                            //             <div className={styles.title}>
-                            //                 <b>Gentra OPTRA faralar sotuvda !</b>
-                            //                 <button type='button'>
-                            //                     Tanlash
-                            //                     <i className="fa-solid fa-arrow-right-long"></i>
-                            //                 </button>
-                            //             </div>
-                            //             <Image
-                            //                 src={slayd1}
-                            //                 alt='slayd'
-                            //                 priority
-                            //             />
-                            //         </div>
-                            //     </SwiperSlide>
-                            // ))
+                            data.new_products_categories?.map((item) => (
+                                <SwiperSlide key={item.id}>
+                                    <div className={styles.topSell__sale__item}>
+                                        <div className={styles.title}>
+                                            <b>{item.name} yangi tovarlar !</b>
+                                            <button
+                                                onClick={() =>
+                                                    router.push({
+                                                        pathname: '/catalog-detail',
+                                                        query: {
+                                                            product_id: item.id
+                                                        }
+                                                    })}
+                                                type='button'>
+                                                Tanlash
+                                                <i className="fa-solid fa-arrow-right-long"></i>
+                                            </button>
+                                        </div>
+                                        <Image
+                                            width={100}
+                                            height={100}
+                                            src={item.category_image}
+                                            alt='slayd'
+                                            priority
+                                        />
+                                    </div>
+                                </SwiperSlide>
+                            ))
                         }
                     </Swiper>
                 </div>

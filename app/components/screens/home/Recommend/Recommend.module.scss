@@ -1,7 +1,7 @@
 @import '../../../../assets/variables';
 
 .products {
-    padding: 0 0 100px;
+    padding: 0 0 50px;
 
     &__item {
         &__header {
@@ -61,6 +61,7 @@
         &__cart {
             height: 500px;
             padding: .5rem;
+            margin-bottom: 4rem;
 
             &__item {
                 width: 100%;
@@ -125,13 +126,9 @@
     }
 }
 
-.qw {
-    margin-top: 4rem;
-}
-
 @media only screen and (max-width: 767px) {
     .products {
-        padding: 0 0 50px;
+        padding: 0;
 
         &__item {
             &__header {
@@ -159,10 +156,10 @@
                 }
 
             }
-        }
-    }
 
-    .qw {
-        margin-top: 2rem;
+            &__cart {
+                margin-bottom: 2rem;
+            }
+        }
     }
 }

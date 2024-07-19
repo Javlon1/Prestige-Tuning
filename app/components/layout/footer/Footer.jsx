@@ -2,12 +2,9 @@ import * as React from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './Footer.module.scss'
-import { Context } from '@/app/components/ui/Context/Context';
 import logo from '../../../../public/img/logo-footer.png'
 
 const Footer = () => {
-    const { lan } = React.useContext(Context);
-
     const [link] = React.useState([
         {
             id: 1,

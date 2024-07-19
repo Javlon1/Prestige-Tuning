@@ -41,7 +41,7 @@ const Category = () => {
         };
 
         fetchData();
-    }, []); // topsellingproducts
+    }, []);
 
     return (
         <section className={styles.category}>
@@ -50,7 +50,12 @@ const Category = () => {
                     {
                         data?.map((item, index) => (
                             <li key={index} className={styles.category__list__item}>
-                                <Link href={'/catalog'}>
+                                <Link
+                                    href={{
+                                        pathname: '/catalog',
+                                        query: { category_id: item.id },
+                                    }}
+                                >
                                     <Image
                                         width={40}
                                         height={40}

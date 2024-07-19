@@ -2,12 +2,9 @@ import * as React from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './RegisterSuccess.module.scss'
-import { Context } from '@/app/components/ui/Context/Context';
 import car from '../../../../../public/img/car.png'
 
 const RegisterSuccess = () => {
-    const { lan } = React.useContext(Context);
-
     return (
         <section className={styles.registerSuccess}>
             <div className={styles.registerSuccess__content}>

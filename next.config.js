@@ -15,6 +15,6 @@ module.exports = {
 
   // Настройки для компонента next/image
   images: {
-    domains: ["646eb6f042d8c8660ed1ad7d55dabf1a.serveo.net"], // Домен сайта
+    domains: ["api.prestigetuning.uz"], // Домен сайта
   },
 };

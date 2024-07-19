@@ -2,11 +2,11 @@ import { createContext, useEffect, useState } from 'react'
 const Context = createContext()
 
 function Provider({ children }) {
-    const [url] = useState("https://646eb6f042d8c8660ed1ad7d55dabf1a.serveo.net/api")
+    const [url] = useState("http://api.prestigetuning.uz/api")
     const [message, setMessage] = useState(false)
     const [messageType, setMessageType] = useState('')
     const [messageText, setMessageText] = useState('')
-    const [auth_token] = useState('b010ae28bdd0b0ce81e4bbcae88ad2db4a1dc406')
+    const [auth_token] = useState('2dc393809238d49e74f8b9f3019055824f70c64f')
 
     const [cart, setCart] = useState(() => {
         if (typeof window !== 'undefined') {

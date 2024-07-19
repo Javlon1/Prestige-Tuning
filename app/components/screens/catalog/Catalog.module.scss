@@ -272,6 +272,16 @@
     }
 }
 
+.dDN {
+    opacity: .5;
+    cursor: not-allowed !important;
+
+    &:hover {
+        background-color: $red !important;
+        color: $white !important;
+    }
+}
+
 .df {
     top: 4rem;
     position: absolute;

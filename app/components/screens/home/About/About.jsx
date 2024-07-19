@@ -1,14 +1,10 @@
 import * as React from 'react';
-import Link from 'next/link'
 import Image from 'next/image'
 import styles from './About.module.scss'
-import { Context } from '@/app/components/ui/Context/Context';
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
 import about from '../../../../../public/img/about.png'
 
 const About = () => {
-    const { lan } = React.useContext(Context);
-
     return (
         <section id='about' className={styles.about}>
             <MyContainer>

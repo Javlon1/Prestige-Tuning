@@ -165,7 +165,9 @@
                     left: auto;
                     width: 320px;
                     position: fixed;
-                    transform: translateY(-200%);
+                    transform: translateY(-100vh);
+                    height: 450px;
+                    overflow-y: scroll;
 
                     &__item {
                         button {

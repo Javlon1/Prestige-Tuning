@@ -1,94 +1,58 @@
 import * as React from 'react';
-import Link from 'next/link'
 import Image from 'next/image'
 import styles from './Recommend.module.scss'
 import { Context } from '@/app/components/ui/Context/Context';
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
-import slayd1 from '../../../../../public/img/slayd.png'
 import { Navigation, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import Message from '@/app/components/ui/Message/Message';
 import { useRouter } from 'next/router';
 
 const Recommend = () => {
     const router = useRouter();
-    const { cart, setCart, setMessage, messageType, setMessageType, messageText, setMessageText } = React.useContext(Context);
-    const [popularData] = React.useState([{ id: 1, nav_en: 'Popular products', nav_ru: 'Популярные товары', nav_uz: 'Ommabop tovarlar' }]);
-    const [recommendData] = React.useState([{ id: 1, nav_en: 'We recommend', nav_ru: 'Мы рекомендуем', nav_uz: 'Biz tavsiya qilamiz' }]);
-    const [byData] = React.useState([{ id: 1, nav_en: 'Buy', nav_ru: 'Купить', nav_uz: 'Sotib olish' }]);
-    const [data] = React.useState(
-        [
-            {
-                id: 1,
-                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "1850000",
-                image: slayd1
-            },
-            {
-                id: 2,
-                title: "Роскошный комфорт",
-                price: "2300000",
-                image: slayd1
-            },
-            {
-                id: 3,
-                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "3500000",
-                image: slayd1
-            },
-            {
-                id: 4,
-                title: "Рабочий стол руководителя",
-                price: "1700000",
-                image: slayd1
-            },
-            {
-                id: 5,
-                title: "Эргономичное кресло",
-                price: "1200000",
-                image: slayd1
-            },
-            {
-                id: 6,
-                title: "Хрустальная люстра",
-                price: "2000000",
-                image: slayd1
-            },
-            {
-                id: 7,
-                title: "Деревянный шкаф",
-                price: "2800000",
-                image: slayd1
-            },
-            {
-                id: 8,
-                title: "Кухонный остров",
-                price: "3200000",
-                image: slayd1
-            },
-            {
-                id: 9,
-                title: "Развлекательный центр",
-                price: "2900000",
-                image: slayd1
-            },
-            {
-                id: 10,
-                title: "Абстрактная картина",
-                price: "1100000",
-                image: slayd1
+    const { url, auth_token } = React.useContext(Context);
+
+    const [data, setData] = React.useState([])
+
+    React.useEffect(() => {
+
+        const fullUrl = `${url}/v1/homepage/recommendedproducts/`;
+        const fetchData = async () => {
+            try {
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data) {
+                    setData(data);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
             }
-        ]
-    )
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <section className={styles.products}>
             <MyContainer>
-                <Message messages={messageText} type={messageType} />
                 <div className={styles.products__item}>
                     <div className={styles.products__item__header}>
                         <div className={styles.products__item__header__title}>
@@ -128,7 +92,7 @@ const Recommend = () => {
                         }}
                     >
                         {
-                            data?.map((item) => (
+                            data.recommended_products?.map((item) => (
                                 <SwiperSlide key={item.id}>
                                     <div className={styles.products__item__cart}>
                                         <div className={styles.products__item__cart__item}>
@@ -136,17 +100,40 @@ const Recommend = () => {
                                                 className={styles.products__item__cart__item__img}
                                             >
                                                 <Image
-                                                    src={item.image}
+                                                    width={300}
+                                                    height={300}
+                                                    src={item.image_1}
                                                     alt='slayd'
                                                     priority
                                                 />
                                             </div>
-                                            <b onClick={() => router.push("/catalog-detail")}>{item.title}</b>
+                                            <b
+                                                onClick={() =>
+                                                    router.push({
+                                                        pathname: '/catalog-detail',
+                                                        query: {
+                                                            product_id: item.id
+                                                        }
+                                                    })
+                                                }>{item.name}</b>
                                             <div className={styles.price}>
-                                                <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
-                                                <button type='button' onClick={() =>
-                                                    router.push("/catalog-detail")
-                                                }>
+                                                {
+                                                    item.uzs_price.length <= 9 ? (
+                                                        <p>{parseInt(item.uzs_price).toLocaleString('en-US').replace(/,/g, ' ')} so'm</p>
+                                                    ) : (
+                                                        <p>{parseInt(item.usd_price).toLocaleString('en-US').replace(/,/g, ' ')} $</p>
+                                                    )
+                                                }
+                                                <button type='button'
+                                                    onClick={() =>
+                                                        router.push({
+                                                            pathname: '/catalog-detail',
+                                                            query: {
+                                                                product_id: item.id
+                                                            }
+                                                        })
+                                                    }
+                                                >
                                                     <strong>Savatga qo'shish</strong>
                                                     <i className="fa-solid fa-cart-shopping"></i>
                                                 </button>
@@ -158,8 +145,7 @@ const Recommend = () => {
                         }
                     </Swiper>
                 </div>
-
-                <div className={`${styles.products__item} ${styles.qw}`}>
+                <div className={styles.products__item}>
                     <div className={styles.products__item__header}>
                         <div className={styles.products__item__header__title}>
                             <p>
@@ -198,7 +184,7 @@ const Recommend = () => {
                         }}
                     >
                         {
-                            data?.map((item) => (
+                            data.new_products?.map((item) => (
                                 <SwiperSlide key={item.id}>
                                     <div className={styles.products__item__cart}>
                                         <div className={styles.products__item__cart__item}>
@@ -206,17 +192,39 @@ const Recommend = () => {
                                                 className={styles.products__item__cart__item__img}
                                             >
                                                 <Image
-                                                    src={item.image}
+                                                    width={300}
+                                                    height={300}
+                                                    src={item.image_1}
                                                     alt='slayd'
                                                     priority
                                                 />
                                             </div>
-                                            <b onClick={() => router.push("/catalog-detail")}>{item.title}</b>
+                                            <b
+                                                onClick={() =>
+                                                    router.push({
+                                                        pathname: '/catalog-detail',
+                                                        query: {
+                                                            product_id: item.id
+                                                        }
+                                                    })
+                                                }>{item.name}</b>
                                             <div className={styles.price}>
-                                                <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
-                                                <button type='button' onClick={() =>
-                                                    router.push("/catalog-detail")
-                                                }>
+                                                {
+                                                    item.uzs_price.length <= 9 ? (
+                                                        <p>{parseInt(item.uzs_price).toLocaleString('en-US').replace(/,/g, ' ')} so'm</p>
+                                                    ) : (
+                                                        <p>{parseInt(item.usd_price).toLocaleString('en-US').replace(/,/g, ' ')} $</p>
+                                                    )
+                                                }
+                                                <button type='button'
+                                                    onClick={() =>
+                                                        router.push({
+                                                            pathname: '/catalog-detail',
+                                                            query: {
+                                                                product_id: item.id
+                                                            }
+                                                        })
+                                                    }>
                                                     <strong>Savatga qo'shish</strong>
                                                     <i className="fa-solid fa-cart-shopping"></i>
                                                 </button>

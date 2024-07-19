@@ -5,100 +5,42 @@ import styles from './Catalog.module.scss'
 import Select from "react-select";
 import { Context } from '@/app/components/ui/Context/Context';
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
-import slayd1 from '../../../../public/img/slayd.png'
 import { useRouter } from 'next/router';
 import AllIntro from '../../ui/AllIntro/AllIntro';
 
 
 const Catalog = () => {
     const router = useRouter();
-    const [itemsPerPage, setItemsPerPage] = React.useState(5);
-    const [currentPage, setCurrentPage] = React.useState(1);
+    const id = router.query;
+    const [de, setDe] = React.useState(false);
 
-    const [data] = React.useState(
-        [
-            {
-                id: 1,
-                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "1850000",
-                image: slayd1
-            },
-            {
-                id: 2,
-                title: "Роскошный комфорт",
-                price: "2300000",
-                image: slayd1
-            },
-            {
-                id: 3,
-                title: "Malibu rul SUPER 3000 X1 5W-40 GM Uzbekistan",
-                price: "3500000",
-                image: slayd1
-            },
-            {
-                id: 4,
-                title: "Рабочий стол руководителя",
-                price: "1700000",
-                image: slayd1
-            },
-            {
-                id: 5,
-                title: "Эргономичное кресло",
-                price: "1200000",
-                image: slayd1
-            },
-            {
-                id: 6,
-                title: "Хрустальная люстра",
-                price: "2000000",
-                image: slayd1
-            },
-            {
-                id: 7,
-                title: "Деревянный шкаф",
-                price: "2800000",
-                image: slayd1
-            },
-            {
-                id: 8,
-                title: "Кухонный остров",
-                price: "3200000",
-                image: slayd1
-            },
-            {
-                id: 9,
-                title: "Развлекательный центр",
-                price: "2900000",
-                image: slayd1
-            }
-        ]
-    )
-    const { lan } = React.useContext(Context);
-    const [filter, setFlter] = React.useState(false);
+    // Используем контекст для получения базового URL и токена авторизации
+    const { url, auth_token } = React.useContext(Context);
+
+    // Состояния для фильтров
+    const [category_id, setCategory_id] = React.useState(id.category_id);
+    const [brand_id, setBrand_id] = React.useState(id.brand_id);
+    const [car_model_id, setCar_model_id] = React.useState(id.car_model_id);
+    const [usd_price_min, setUsd_price_min] = React.useState("");
+    const [usd_price_max, setUsd_price_max] = React.useState("");
+
+    // Состояния для данных
+    const [productData, setProductData] = React.useState([]);
+    const [filterKategory, setFilterKategory] = React.useState([]);
+    const [brendData, setBrendData] = React.useState([]);
+    const [carModel, setCarModel] = React.useState([]);
+    const [data, setData] = React.useState([]);
+
+    // Состояния для управления фильтрацией
+    const [filter, setFilter] = React.useState(false);
     const [kategory, setKategory] = React.useState(false);
     const [brend, setBrend] = React.useState(false);
     const [price, setPrice] = React.useState(false);
     const [model, setModel] = React.useState(false);
 
-    const [brendData, setBrendData] = React.useState([]);
-    const [productData, setProductData] = React.useState([
-        {
-            id: 1,
-            title: "Malibu rul",
-        },
-        {
-            id: 2,
-            title: "rul",
-        },
-        {
-            id: 3,
-            title: "Malibu rul",
-        },
-        {
-            id: 4,
-            title: "Рабочий стол руководителя",
-        }
-    ]);
+    // Для управления пагинацией
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const [itemsPerPage, setItemsPerPage] = React.useState(1);
     const [selectedProduct, setSelectedProduct] = React.useState([]);
 
 
@@ -108,45 +50,92 @@ const Catalog = () => {
 
     const productOptions = productData.map((item) => ({
         value: item.id,
-        label: item.title,
+        label: item.name,
     }));
 
-    //   
-    // client: selectedProduct.value ? selectedProduct.value : null,
-    // 
+    // console.log(selectedProduct.value);
 
-    const [filterKategory, setFilterKategory] = React.useState([
-        {
-            id: 1,
-            link: "/kategoriya",
-            nav: "Kassalar",
-            icon: "fa-solid fa-wallet",
-        },
-        {
-            id: 2,
-            link: "/profit",
-            nav: "Pul olish",
-            icon: "fa-solid fa-circle-dollar-to-slot",
-        },
-        {
-            id: 3,
-            link: "/expenses",
-            nav: "Pul berish",
-            icon: "fa-solid fa-money-bill",
-        },
-    ]);
+    React.useEffect(() => {
+        const fullUrl = `${url}/v1/products/filter_products/all_data/`;
+        const fetchData = async () => {
+            try {
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
 
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
+                const data = await response.json();
+
+                if (data) {
+                    setProductData(data.categories);
+                    setFilterKategory(data.categories);
+                    setBrendData(data.brands);
+                    setCarModel(data.car_models);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    React.useEffect(() => {
+        const fullUrl = `${url}/v1/products/filter_products/?category_id=${category_id ? category_id : ""}&page=${currentPage}&brand_id=${brand_id ? brand_id : ""}&usd_price_min=${usd_price_min ? usd_price_min : ""}&usd_price_max=${usd_price_max ? usd_price_max : ""}&car_model_id=${car_model_id ? car_model_id : ""}`;
+        const fetchData = async () => {
+            try {
+                const response = await fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${auth_token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Ошибка: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data) {
+                    setData(data?.results);
+                    setItemsPerPage(data?.total_pages);
+                } else {
+                    console.error('Ошибка: Некорректные данные получены от сервера.');
+                }
+
+            } catch (error) {
+                console.error('Ошибка при запросе данных:', error.message);
+            }
+        };
+
+        fetchData();
+    }, [currentPage, de]);
+
+    const applyFilters = () => {
+        setDe(!de)
+        setCurrentPage(1);
     };
 
-    const handleNextPage = () => {
-        setCurrentPage((prevPage) => prevPage + 1);
-    };
-
-    const handlePrevPage = () => {
-        setCurrentPage((prevPage) => prevPage - 1);
+    const clearFilters = () => {
+        setDe(!de)
+        setCategory_id("");
+        setBrand_id("");
+        setCar_model_id("");
+        setUsd_price_min("");
+        setUsd_price_max("");
+        setCurrentPage(1);
     };
 
     return (
@@ -156,8 +145,8 @@ const Catalog = () => {
                 <MyContainer>
                     <div className={styles.catalog__item}>
                         <div className={styles.catalog__item__res}>
-                            <span onClick={() => setFlter(!filter)}>
-                                <i class={`fa-solid ${!filter ? "fa-arrow-up-short-wide" : "fa-arrow-down-short-wide"}`}></i>
+                            <span onClick={() => setFilter(!filter)}>
+                                <i className={`fa-solid ${!filter ? "fa-arrow-up-short-wide" : "fa-arrow-down-short-wide"}`}></i>
                                 Filterlash
                             </span>
                         </div>
@@ -170,22 +159,16 @@ const Catalog = () => {
                                     onChange={handleProductChange}
                                 />
                             </div>
-
                             <ul className={styles.catalog__item__left__list}>
                                 <span onClick={() => setKategory(!kategory)} className={styles.span}>
-                                    <p>
-                                        Kategoriya
-                                    </p>
+                                    <p>Kategoriya</p>
                                     <i className={`fa-solid ${kategory ? "fa-angle-up" : "fa-angle-down"}`}></i>
                                 </span>
                                 {filterKategory?.map((item) => (
-                                    <li
-                                        key={item.id}
-                                        className={`${kategory ? styles.dn : ""}`}
-                                    >
+                                    <li key={item.id} className={`${kategory ? styles.dn : ""}`}>
                                         <label>
-                                            <input type="checkbox" name="" id="" />
-                                            <p>{item.nav}</p>
+                                            <input type="checkbox" onChange={() => setCategory_id(item.id)} checked={category_id === item.id} />
+                                            <p>{item.name}</p>
                                         </label>
                                     </li>
                                 ))}
@@ -193,19 +176,14 @@ const Catalog = () => {
 
                             <ul className={styles.catalog__item__left__list}>
                                 <span onClick={() => setBrend(!brend)} className={styles.span}>
-                                    <p>
-                                        Brend
-                                    </p>
+                                    <p>Brend</p>
                                     <i className={`fa-solid ${brend ? "fa-angle-up" : "fa-angle-down"}`}></i>
                                 </span>
-                                {filterKategory?.map((item) => (
-                                    <li
-                                        key={item.id}
-                                        className={`${brend ? styles.dn : ""}`}
-                                    >
+                                {brendData?.map((item) => (
+                                    <li key={item.id} className={`${brend ? styles.dn : ""}`}>
                                         <label>
-                                            <input type="checkbox" name="" id="" />
-                                            <p>{item.nav}</p>
+                                            <input type="checkbox" onChange={() => setBrand_id(item.id)} checked={brand_id === item.id} />
+                                            <p>{item.name}</p>
                                         </label>
                                     </li>
                                 ))}
@@ -213,47 +191,42 @@ const Catalog = () => {
 
                             <div className={styles.catalog__item__left__list}>
                                 <span onClick={() => setPrice(!price)} className={styles.span}>
-                                    <p>
-                                        Summani tanlang
-                                    </p>
+                                    <p>Summani tanlang</p>
                                     <i className={`fa-solid ${price ? "fa-angle-up" : "fa-angle-down"}`}></i>
                                 </span>
-                                <div
-                                    className={`${price ? styles.dn : styles.inps}`}
-                                >
+                                <div className={`${price ? styles.dn : styles.inps}`}>
                                     <input
                                         type="text"
                                         placeholder='10$ dan'
+                                        value={usd_price_min}
+                                        onChange={(e) => setUsd_price_min(e.target.value)}
                                     />
                                     <input
                                         type="text"
                                         placeholder='1200$ gacha'
+                                        value={usd_price_max}
+                                        onChange={(e) => setUsd_price_max(e.target.value)}
                                     />
                                 </div>
                             </div>
 
                             <ul className={styles.catalog__item__left__list}>
                                 <span onClick={() => setModel(!model)} className={styles.span}>
-                                    <p>
-                                        Avtomobil rusumi
-                                    </p>
+                                    <p>Avtomobil rusumi</p>
                                     <i className={`fa-solid ${model ? "fa-angle-up" : "fa-angle-down"}`}></i>
                                 </span>
-                                {filterKategory?.map((item) => (
-                                    <li
-                                        key={item.id}
-                                        className={`${model ? styles.dn : ""}`}
-                                    >
+                                {carModel?.map((item) => (
+                                    <li key={item.id} className={`${model ? styles.dn : ""}`}>
                                         <label>
-                                            <input type="checkbox" name="" id="" />
-                                            <p>{item.nav}</p>
+                                            <input type="checkbox" onChange={() => setCar_model_id(item.id)} checked={car_model_id === item.id} />
+                                            <p>{item.name}</p>
                                         </label>
                                     </li>
                                 ))}
                             </ul>
 
-                            <button type='button'>Filterlash</button>
-                            <button className={!filter ? styles.dN : ''} type='button'>Filterni bekor qilish</button>
+                            <button className={!brand_id && !category_id && !car_model_id && !usd_price_min && !usd_price_max ? styles.dDN : ''} type='button' onClick={applyFilters}>Filterlash</button>
+                            <button className={!brand_id && !category_id && !car_model_id && !usd_price_min && !usd_price_max ? styles.dN : ''} type='button' onClick={clearFilters}>Filterni bekor qilish</button>
                         </div>
                         <div className={styles.catalog__item__content}>
                             <div className={styles.catalog__item__content__list}>
@@ -261,22 +234,38 @@ const Catalog = () => {
                                     data?.map((item) => (
                                         <div key={item.id} className={styles.catalog__item__content__list__cart}>
                                             <div className={styles.catalog__item__content__list__cart__item}>
-                                                <div
-                                                    className={styles.catalog__item__content__list__cart__item__img}
-                                                >
+                                                <div className={styles.catalog__item__content__list__cart__item__img}>
                                                     <Image
-                                                        src={item.image}
+                                                        width={300}
+                                                        height={300}
+                                                        src={item.image_1}
                                                         alt='slayd'
                                                         priority
                                                     />
                                                 </div>
-                                                <Link href={`/catalog-detail`}>
-                                                    <b>{item.title}</b>
+                                                <Link
+                                                    href={{
+                                                        pathname: '/catalog-detail',
+                                                        query: { product_id: item.id },
+                                                    }}
+                                                >
+                                                    <b>{item.name}</b>
                                                 </Link>
                                                 <div className={styles.price}>
-                                                    <p>{parseInt(item.price).toLocaleString('en-US').replace(/,/g, ' ')}</p>
+                                                    {
+                                                        item.uzs_price.length <= 9 ? (
+                                                            <p>{parseInt(item.uzs_price).toLocaleString('en-US').replace(/,/g, ' ')} so'm</p>
+                                                        ) : (
+                                                            <p>{parseInt(item.usd_price).toLocaleString('en-US').replace(/,/g, ' ')} $</p>
+                                                        )
+                                                    }
                                                     <button type='button' onClick={() =>
-                                                        router.push("/catalog-detail")
+                                                        router.push({
+                                                            pathname: '/catalog-detail',
+                                                            query: {
+                                                                product_id: item.id
+                                                            }
+                                                        })
                                                     }>
                                                         <i className="fa-solid fa-cart-shopping"></i>
                                                     </button>
@@ -290,7 +279,7 @@ const Catalog = () => {
                             <div className={styles.catalog__item__content__pagination}>
                                 <button type='button'
                                     className={styles.catalog__item__content__pagination__btn}
-                                    onClick={handlePrevPage}
+                                    onClick={() => setCurrentPage(currentPage - 1)}
                                     disabled={currentPage === 1}
                                 >
                                     <i className="fa-solid fa-angles-left"></i>
@@ -299,10 +288,9 @@ const Catalog = () => {
                                 {Array.from({ length: itemsPerPage }, (_, index) => index + 1).map(
                                     (page) => (
                                         <button type='button'
-                                            className={`${styles.catalog__item__content__pagination__items} ${currentPage === page ? styles.act : ""
-                                                }`}
+                                            className={`${styles.catalog__item__content__pagination__items} ${currentPage === page ? styles.act : ""}`}
                                             key={page}
-                                            onClick={() => handlePageChange(page)}
+                                            onClick={() => setCurrentPage(page)}
                                         >
                                             {page}
                                         </button>
@@ -311,7 +299,7 @@ const Catalog = () => {
 
                                 <button type='button'
                                     className={styles.catalog__item__content__pagination__btn}
-                                    onClick={handleNextPage}
+                                    onClick={() => setCurrentPage(currentPage + 1)}
                                     disabled={currentPage === itemsPerPage}
                                 >
                                     <i className="fa-solid fa-angles-right"></i>
@@ -320,7 +308,7 @@ const Catalog = () => {
                         </div>
                     </div>
                 </MyContainer>
-            </section >
+            </section>
         </>
     )
 }

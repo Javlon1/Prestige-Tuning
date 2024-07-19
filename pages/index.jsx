@@ -6,7 +6,7 @@ import TopSell from '@/app/components/screens/home/TopSell/TopSell';
 import Recommend from '@/app/components/screens/home/Recommend/Recommend';
 import About from '@/app/components/screens/home/About/About';
 import Contact from '@/app/components/screens/home/Contact/Contact';
-import logo from '../public/img/logo-footer.png';
+import logo from '../public/img/logo.png';
 
 const Index = () => {
     return (
