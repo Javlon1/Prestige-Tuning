@@ -15,6 +15,6 @@ module.exports = {
 
   // Настройки для компонента next/image
   images: {
-    domains: ["api.prestigetuning.uz"], // Домен сайта
+    domains: ["oshnalartv.uz/"], // Домен сайта
   },
 };
