@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from 'react'
 const Context = createContext()
 
 function Provider({ children }) {
-    const [url] = useState("http://api.prestigetuning.uz/api")
+    const [url] = useState("https://oshnalartv.uz/api")
     const [message, setMessage] = useState(false)
     const [messageType, setMessageType] = useState('')
     const [messageText, setMessageText] = useState('')
