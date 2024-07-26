@@ -42,7 +42,6 @@ const Category = () => {
 
         fetchData();
     }, []);
-
     return (
         <section className={styles.category}>
             <MyContainer>

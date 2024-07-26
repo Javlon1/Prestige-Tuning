@@ -76,7 +76,7 @@
                             border: 0;
                             background: 0 0;
                             font-size: 14px;
-                            color: $white;
+                            color: $gray;
                             font-size: 1rem;
                             padding: 0.75em 1em;
 
@@ -371,7 +371,7 @@
                     gap: 20px;
 
                     &__logo {
-                        width: 150px;
+                        width: 180px;
 
                         img {
                             width: 100%;
@@ -397,6 +397,7 @@
                         border: 0;
                         color: $red;
                         position: relative;
+                        font-size: 1.1rem;
 
                         span {
                             position: absolute;

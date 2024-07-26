@@ -14,6 +14,7 @@ import MyContainer from '@/app/components/ui/MyContainer/MyContainer';
 const Intro = () => {
     const { url, auth_token } = React.useContext(Context);
     const [data, setData] = React.useState([])
+    const [loader, setLoader] = React.useState(true);
 
     React.useEffect(() => {
 
@@ -36,6 +37,7 @@ const Intro = () => {
 
                 if (data) {
                     setData(data);
+                    setLoader(false);
                 } else {
                     console.error('Ошибка: Некорректные данные получены от сервера.');
                 }
@@ -71,27 +73,31 @@ const Intro = () => {
                         loop={true}
                     >
                         {
-                            data?.map((item, index) => (
-                                <SwiperSlide key={index}>
-                                    <div className={styles.intro__item}>
-                                        <div className={styles.intro__item__left}>
-                                            <b className={styles.intro__item__left__title}>
-                                                {item.name} <span>{item.ceiling}%</span>  gacha chegirma !
-                                            </b>
-                                            <p>{item.description}</p>
+                            loader ?
+                                <div className={styles.loader}>
+                                    <div className={styles.loader__ring}></div>
+                                </div> :
+                                data?.map((item, index) => (
+                                    <SwiperSlide key={index}>
+                                        <div className={styles.intro__item}>
+                                            <div className={styles.intro__item__left}>
+                                                <b className={styles.intro__item__left__title}>
+                                                    {item.name} <span>{item.ceiling}%</span>  gacha chegirma !
+                                                </b>
+                                                <p>{item.description}</p>
+                                            </div>
+                                            <div className={styles.intro__item__right}>
+                                                <Image
+                                                    width={500}
+                                                    height={500}
+                                                    src={item.image_url}
+                                                    alt='slayd'
+                                                    priority
+                                                />
+                                            </div>
                                         </div>
-                                        <div className={styles.intro__item__right}>
-                                            <Image
-                                                width={500}
-                                                height={500}
-                                                src={item.image_url}
-                                                alt='slayd'
-                                                priority
-                                            />
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                            ))
+                                    </SwiperSlide>
+                                ))
                         }
                     </Swiper>
                     <div className={styles['swiper-button-prev-custom']}>

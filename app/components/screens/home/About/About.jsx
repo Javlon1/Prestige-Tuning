@@ -2,7 +2,7 @@ import * as React from 'react';
 import Image from 'next/image'
 import styles from './About.module.scss'
 import MyContainer from '@/app/components/ui/MyContainer/MyContainer'
-import about from '../../../../../public/img/about.png'
+import about from '../../../../../public/img/image.png'
 
 const About = () => {
     return (

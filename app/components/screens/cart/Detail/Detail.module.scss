@@ -34,7 +34,7 @@
                     img {
                         width: 100%;
                         height: 500px;
-                        object-fit: contain;
+                        object-fit: cover;
                     }
                 }
 
@@ -46,7 +46,6 @@
                     &__item {
                         width: 130px;
                         height: 130px;
-                        padding: 1rem;
                         border: 3px solid transparent;
                         transition: $transition;
                         cursor: pointer;
@@ -54,7 +53,7 @@
                         img {
                             width: 100%;
                             height: 100%;
-                            object-fit: contain;
+                            object-fit: cover;
                         }
                     }
                 }
@@ -232,31 +231,32 @@
         }
 
         &__cart {
-            height: 500px;
+            height: 420px;
             padding: .5rem;
 
             &__item {
                 width: 100%;
                 height: 100%;
                 box-shadow: $shadow;
-                padding: 10px;
-                padding-bottom: 2rem;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
                 gap: 10px;
+                border-radius: 1rem;
+                overflow: hidden;
 
                 &__img {
                     width: 100%;
-                    height: 70%;
+                    height: 75%;
 
                     img {
                         width: 100%;
                         height: 100%;
+                        object-fit: cover;
                     }
                 }
 
                 .price {
+                    padding: 0 10px;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
@@ -279,6 +279,7 @@
                         border-radius: 5px;
                         cursor: pointer;
                         transition: $transition;
+                        font-size: 1rem;
 
                         &:hover {
                             background-color: $red;
@@ -288,6 +289,8 @@
                 }
 
                 b {
+                    margin-top: 10px;
+                    padding: 0 10px;
                     color: $black;
                     font-size: 1.1rem;
                     font-weight: 600;
@@ -295,6 +298,37 @@
                 }
             }
         }
+    }
+}
+
+.loader {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 0;
+
+    &__ring {
+        margin-top: 2rem;
+        pointer-events: none;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: $red;
+        animation: an1 1s ease infinite;
+    }
+
+}
+
+@keyframes an1 {
+    0% {
+        transform: rotate(0turn);
+    }
+
+    100% {
+        transform: rotate(1turn);
     }
 }
 
@@ -341,7 +375,7 @@
                 .left {
                     &__img {
                         img {
-                            width: 90%;
+                            width: 100%;
                             height: 250px;
                         }
                     }
@@ -351,8 +385,7 @@
 
                         &__item {
                             width: auto;
-                            height: auto;
-                            padding: .5rem;
+                            height: 100px;
                         }
                     }
                 }
@@ -362,6 +395,13 @@
                         width: 100%;
                     }
                 }
+            }
+        }
+        &__item__header__btns {
+            .btn__next,
+            .btn__prev {
+                width: 35px;
+                height: 35px;
             }
         }
     }

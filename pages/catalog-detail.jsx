@@ -8,7 +8,7 @@ const CatalogDetail = () => {
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.png" />
-                <title> Prestic tuning | Katalog</title>
+                <title> Prestige Tuning | Maxsulot haqida </title>
             </Head>
 
             <main>

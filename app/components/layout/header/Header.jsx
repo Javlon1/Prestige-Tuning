@@ -89,7 +89,7 @@ const Header = () => {
                 },
             });
             const data = await response.json();
-            console.log(data.results[0]);
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             } else {
@@ -185,51 +185,59 @@ const Header = () => {
                 <div className={styles.header__items__bottom}>
                     <MyContainer>
                         <div className={styles.header__items__bottom__items}>
-                            <button
-                                type='button'
-                                onClick={() => {
-                                    setCatalog(!catalog)
-                                    setham(false)
-                                }} className={`${styles.katalog} ${catalog ? styles.katalogAct : ""}`}>
-                                <Image
-                                    src={dots}
-                                    width={20}
-                                    height={20}
-                                    alt='dots'
-                                />
-                                <p>
-                                    Katalog
-                                </p>
-                            </button>
-                            <ul className={`${styles.catalog} ${catalog ? styles.catalogAct : ""}`}>
-                                {
-                                    data?.map((item) => (
-                                        <li key={item.id} className={styles.catalog__item}>
-                                            <button
-                                                type='button'
-                                                onClick={() => {
-                                                    setCatalog(false)
-                                                    router.push({
-                                                        pathname: '/catalog',
-                                                        query: {
-                                                            category_id: item.id
-                                                        }
-                                                    })
-                                                }} >
-                                                <Image
-                                                    src={item.category_image}
-                                                    width={20}
-                                                    height={20}
-                                                    alt='dots'
-                                                />
-                                                <p>
-                                                    {item.name}
-                                                </p>
-                                            </button>
-                                        </li>
-                                    ))
-                                }
-                            </ul>
+                            {
+                                router.pathname === '/catalog' ? <div></div> : (
+                                    <button
+                                        type='button'
+                                        onClick={() => {
+                                            setCatalog(!catalog)
+                                            setham(false)
+                                        }} className={`${styles.katalog} ${catalog ? styles.katalogAct : ""}`}>
+                                        <Image
+                                            src={dots}
+                                            width={20}
+                                            height={20}
+                                            alt='dots'
+                                        />
+                                        <p>
+                                            Katalog
+                                        </p>
+                                    </button>
+                                )
+                            }
+                            {
+                                router.pathname === '/catalog' ? <div></div> : (
+                                    <ul className={`${styles.catalog} ${catalog ? styles.catalogAct : ""}`}>
+                                        {
+                                            data?.map((item) => (
+                                                <li key={item.id} className={styles.catalog__item}>
+                                                    <button
+                                                        type='button'
+                                                        onClick={() => {
+                                                            setCatalog(false)
+                                                            router.push({
+                                                                pathname: '/catalog',
+                                                                query: {
+                                                                    category_id: item.id
+                                                                }
+                                                            })
+                                                        }} >
+                                                        <Image
+                                                            src={item.category_image}
+                                                            width={20}
+                                                            height={20}
+                                                            alt='dots'
+                                                        />
+                                                        <p>
+                                                            {item.name}
+                                                        </p>
+                                                    </button>
+                                                </li>
+                                            ))
+                                        }
+                                    </ul>
+                                )
+                            }
                             <ul className={`${styles.list} ${ham ? styles.navActive : ""}`}>
                                 {
                                     headerData?.map((item) => (
@@ -273,10 +281,12 @@ const Header = () => {
                             </button>
 
                             <div className={styles.search}>
-                                <form className={styles.form}>
+                                <form onSubmit={handleSubmit} className={styles.form}>
                                     <input
                                         type="text"
-                                        placeholder='Tovar nomini kiriting'
+                                        placeholder="Tovar nomini kiriting"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     />
                                     <button className={styles.btn} type='submit'>
                                         <strong>qidirish</strong>

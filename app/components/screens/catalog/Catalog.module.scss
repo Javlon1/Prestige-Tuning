@@ -168,34 +168,34 @@
                         width: 100%;
                         height: 100%;
                         box-shadow: $shadow;
-                        padding: 10px;
-                        padding-bottom: 2rem;
                         display: flex;
                         flex-direction: column;
-                        justify-content: space-between;
                         gap: 10px;
                         border-radius: 10px;
+                        overflow: hidden;
                         border: 1px solid $border-color;
 
                         &__img {
                             width: 100%;
-                            height: 70%;
+                            height: 75%;
 
                             img {
                                 width: 100%;
                                 height: 100%;
+                                object-fit: cover;
                             }
                         }
 
                         .price {
+                            padding: 0 10px;
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
 
                             p {
                                 color: $gray;
-                                font-size: 1.1rem;
-                                font-weight: 500;
+                                font-size: 1.2rem;
+                                font-weight: 600;
                             }
 
                             button {
@@ -218,9 +218,14 @@
                             }
                         }
 
+                        a {
+                            margin-top: 10px;
+                        }
+
                         b {
+                            padding: 0 10px;
                             color: $black;
-                            font-size: 1.1rem;
+                            font-size: 1.2rem;
                             font-weight: 600;
                         }
                     }
@@ -233,7 +238,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
-                justify-content: end;
+                justify-content: center;
                 gap: 5px;
 
                 &__btn,
@@ -292,6 +297,42 @@
 .act {
     color: $white !important;
     background-color: $black !important;
+}
+
+.loaderr {
+    @include loader;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.none {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    p {
+        color: $gray;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+}
+
+.loader {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+
+    &__ring {
+        @include loader;
+        height: 400px;
+        min-width: 250px;
+        flex: 1;
+    }
 }
 
 @media only screen and (max-width: 1199px) {

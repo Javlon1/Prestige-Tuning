@@ -9,8 +9,8 @@
         box-shadow: $shadow;
 
         &__item {
-            flex: 1;
-            min-width: 32%;
+            flex: 1 1 32%; 
+            min-width: 200px;
             transition: $transition;
 
             a {
@@ -21,6 +21,7 @@
                 border: 1px solid $border-color;
                 background-color: $white;
                 color: $black;
+                min-width: 200px;
 
                 img {
                     width: 40px;
@@ -89,7 +90,27 @@
     .category {
         &__list {
             &__item {
-                min-width: 49%;
+                flex: 1 1 100%; 
+                a {
+                    gap: 10px;
+                    padding: 1rem;
+                }
+
+                &:last-child {
+                    a {
+                        padding: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 565px) {
+    .category {
+        &__list {
+            &__item {
+                flex: 1 1 100%;
 
                 a {
                     gap: 10px;

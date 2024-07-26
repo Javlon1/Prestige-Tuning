@@ -76,7 +76,7 @@
             justify-content: space-between;
             padding: 10px 3rem;
             border-radius: 2rem;
-            background-color: $black;
+            background-color: $dark-orange;
 
             &__left {
                 width: 55%;
@@ -112,6 +112,30 @@
                 }
             }
         }
+    }
+}
+
+.loader {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+
+    &__ring {
+        @include loader;
+        height: 400px;
+        min-width: 250px;
+        flex: 1;
+    }
+
+    &__item {
+        @include loader;
+        height: 200px;
+        min-width: 250px;
+        flex: 1;
     }
 }
 
@@ -199,6 +223,7 @@
                     img {
                         width: 100%;
                         height: 100%;
+                        object-fit: cover;
                     }
                 }
             }
